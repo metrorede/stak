@@ -49,13 +49,19 @@ from stoqlib.gui.search.sellablesearch import SellableSearch
 from stoqlib.gui.slaves.workorderslave import (WorkOrderOpeningSlave,
                                                WorkOrderQuoteSlave,
                                                WorkOrderExecutionSlave,
-                                               WorkOrderHistorySlave)
+                                               WorkOrderHistorySlave,
+                                               WorkOrderAttachmentSlave)
 from stoqlib.gui.utils.iconutils import get_workorder_state_icon, render_icon
 from stoqlib.gui.widgets.queryentry import ClientEntryGadget
 from stoqlib.lib.decorators import cached_property
 from stoqlib.lib.message import warning
 from stoqlib.lib.permissions import PermissionManager
 from stoqlib.lib.translation import stoqlib_gettext
+
+from stoqlib.gui.fields import (AttachmentField)
+from stoqlib.domain.attachment import Attachment
+
+from stoqlib.lib.message import yesno
 
 _ = stoqlib_gettext
 
@@ -113,6 +119,7 @@ class WorkOrderEditor(BaseEditor):
             station=api.get_current_station(store),
             category=self._default_category,
             defect_detected=defect_detected,
+            attachment = AttachmentField(_('Attachment')).attachment
         )
 
     def setup_slaves(self):
@@ -135,6 +142,11 @@ class WorkOrderEditor(BaseEditor):
             self.store, self.model, visual_mode=self.visual_mode,
             edit_mode=self.edit_mode)
         self.attach_slave('history_holder', self.history_slave)
+
+        if self.model.attachment:
+            self.attachment_content.set_visible(True)
+            self.attachment_content.set_label(self.model.attachment.name)
+            self.attachment_chooser_delete.set_visible(True)
 
         self._update_view()
 
@@ -328,6 +340,51 @@ class WorkOrderEditor(BaseEditor):
         self._update_sellable_desc()
         self.quantity.set_sensitive(True)
 
+    def on_attachment_chooser__file_set(self, button):
+        print("FILESET ================")
+        filename = self.attachment_chooser.get_filename()
+        data = open(filename, 'rb').read()
+        mimetype = str(Gio.content_type_guess(filename, data))
+
+        if self.model.attachment is None:
+            self.model.attachment = Attachment()#store=self.store)
+        self.model.attachment.name = str(os.path.basename(filename))
+        self.model.attachment.mimetype = mimetype
+        self.model.attachment.blob = data
+        print("FILESET2============================")
+
+    def on_attachment_content__clicked(self, button):
+        chooser = Gtk.FileChooserDialog(
+            _("Export Spreadsheet..."), None,
+            Gtk.FileChooserAction.SAVE,
+            (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+             Gtk.STOCK_SAVE, Gtk.ResponseType.OK))
+        chooser.set_do_overwrite_confirmation(True)
+        chooser.set_current_name(self.model.attachment.get_description())
+
+        #chooser.add_filter(xls_filter)
+
+        response = chooser.run()
+        filename = None
+        if response != Gtk.ResponseType.OK:
+            chooser.destroy()
+            return
+
+        filename = chooser.get_filename()
+        chooser.destroy()
+        open(filename, 'wb').write(self.model.attachment.blob)
+
+
+    def on_attachment_chooser_delete__clicked(self, button):
+        print("DELET ==========================")
+
+        if not yesno(_("Are you sure you want to remove the attachment?"),
+                     Gtk.ResponseType.NO, _("Remove"), _("Don't remove")):
+            return
+
+        self.model.attachment.blob = None
+        self.model.attachment = None
+        self._update_view()
 
 class WorkOrderPackageSendEditor(BaseEditor):
     """Editor responsible for creating and sending |workorderpackages|

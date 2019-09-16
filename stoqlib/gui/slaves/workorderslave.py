@@ -56,6 +56,9 @@ from stoqlib.lib.defaults import QUANTITY_PRECISION, MAX_INT
 from stoqlib.lib.formatters import format_quantity, format_sellable_description
 from stoqlib.lib.translation import stoqlib_gettext
 
+from stoqlib.gui.fields import (AttachmentField)
+from stoqlib.domain.attachment import Attachment
+
 _ = stoqlib_gettext
 
 
@@ -500,3 +503,43 @@ class WorkOrderHistorySlave(BaseEditorSlave):
     def on_details_btn__clicked(self, button):
         selected = self.details_list.get_selected()
         self._show_details(selected)
+
+
+class WorkOrderAttachmentSlave(BaseEditorSlave):
+    gladefile = 'WorkOrderAttachmentSlave'
+    model_type = WorkOrder
+    proxy_widgets = [
+        # 'execution_responsible',
+        # 'attachment_chooser'
+    ]
+
+    #
+    #  BaseEditorSlave
+    #
+
+    def __init__(self, parent, *args, **kwargs):
+        self.parent = parent
+        BaseEditorSlave.__init__(self, *args, **kwargs)
+
+    def setup_proxies(self):
+        self.proxy = self.add_proxy(self.model, self.proxy_widgets)
+
+    def create_model(self, store):
+        print("=======")
+        # criar model com dados necessarios
+        return WorkOrder()
+
+    def on_attachment_chooser__file_set(self, button):
+        print("asdf=======")
+        filename = self.attachment_chooser.get_filename()
+        data = open(filename, 'rb').read()
+        mimetype = str(Gio.content_type_guess(filename, data))
+
+        if self.model.attachment is None:
+            self.model.attachment = Attachment()#store=self.store)
+        self.model.attachment.name = str(os.path.basename(filename))
+        self.model.attachment.mimetype = mimetype
+        self.model.attachment.blob = data
+
+        print("asdf2============================")
+
