@@ -1,0 +1,42 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="guide" style="task 2column"
+      id="app-payable">
+
+  <title>Aplicativo Contas a pagar</title>
+  <info>
+    <desc>
+      <link xref="account-payable" />...
+    </desc>
+
+    <link type="guide" xref="index" />
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+  </info>
+
+  <p>
+    <link xref="overview#app">Aplicativo</link> responsável por gerenciar
+    <link xref="account-payable">contas a pagar</link>, normalmente provindas
+    de <link xref="purchase">pedidos de compra</link>.
+  </p>
+  <p>
+    Os pagamentos mostrados aqui utilizam marcações para facilitar a
+    visualização de seus status:
+  </p>
+  <list>
+    <item>
+      <p>
+        <gui>Pagamentos em negrito</gui> estão atrasadas
+      </p>
+    </item>
+    <item>
+      <p>
+        <gui>Pagamentos riscados</gui> já foram recebidos
+      </p>
+    </item>
+  </list>
+
+  <!--This will automatically list all pages that links to this page-->
+  <links type="topic" style="2column">
+    <title>Sumário</title>
+  </links>
+
+</page>

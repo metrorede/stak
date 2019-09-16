@@ -1,0 +1,46 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="guide" style="task 2column"
+      id="app-financial">
+
+  <title>Aplicativo Financeiro</title>
+  <info>
+    <desc>
+      <link xref="account" />,
+      <link xref="transaction" />,
+      <link xref="account-payable" />,
+      <link xref="account-receivable" />...
+    </desc>
+
+    <link type="guide" xref="index" />
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+  </info>
+
+  <p>
+    Este <link xref="overview#app">aplicativo</link> é responsável pelo
+    controle e gerenciamento financeiro da empresa. Todas as contas correntes,
+    contas de investimento, contas de cartões de crédito assim como
+    <link xref="account-payable">contas a pagar</link> e
+    <link xref="account-receivable">contas a receber</link> poderão ser
+    controladas neste aplicativo através de
+    <link xref="transaction">transações financeiras</link>.
+  </p>
+  <p>
+    A separação de funcionalidades nesse aplicativo é feito por abas. A
+    primeira aberta será sempre a aba <gui>Contas</gui>, que mostra uma lista
+    de <link xref="account">contas</link> existentes. Um duplo clique em
+    qualquer uma abrirá uma nova aba, listando todas as
+    <link xref="transaction">transações</link> existentes nessa conta.
+  </p>
+  <p>
+    o stoq utiliza o método das partidas dobradas para a organização de
+    transações financeiras. isso significa que cada transação possui entrada em
+    uma conta e saída em outra. você pode ver mais informações aqui:
+    <link xref="account#double-booking" />.
+  </p>
+
+  <!--This will automatically list all pages that links to this page-->
+  <links type="topic" style="2column">
+    <title>Sumário</title>
+  </links>
+
+</page>

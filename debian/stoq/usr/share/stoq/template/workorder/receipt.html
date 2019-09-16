@@ -1,0 +1,61 @@
+<%inherit file="../base/base.html" />
+<%namespace file="../base/base.html" import="header, setup_margin_labels" />
+
+<%block name="title_head">
+  <title>${ title }</title>
+</%block>
+
+<%block name="extra_meta">
+  ${ setup_margin_labels(title) }
+  <link rel="stylesheet" href="workorder/workorder.css" type="text/css" />
+</%block>
+
+<div class="page">
+  ${ header(complete_header, title, None, notes) }
+
+  <table class="details">
+    <tbody>
+      <tr>
+        <td>${ _("Order Number") }:</td>
+        <td>${ report.workorder.identifier }</td>
+      </tr>
+      % if report.workorder.sellable:
+      <tr>
+        <td>${ _("Equipment") }:</td>
+        <td>${ report.workorder.sellable.description }</td>
+      </tr>
+      % endif
+      <tr>
+        <td>${ _("Description") }:</td>
+        <td>${ report.workorder.description }</td>
+      </tr>
+      <tr>
+        <td>${ _("Client") }:</td>
+        <td>${ report.workorder.client.person.name }</td>
+        <td>${ _("Responsible") }:</td>
+        <td>${ report.workorder.execution_responsible.get_description() if \
+               report.workorder.execution_responsible else '' }</td>
+      </tr>
+      <tr>
+        <td>${ _("Approval date") }:</td>
+        <td>${ format_date(report.workorder.approve_date) }</td>
+        <td>${ _("Finish date") }:</td>
+        <td>${ format_date(report.workorder.finish_date) }</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%include file="workorder-items.html" />
+
+  <section id="notice">
+    <span>
+      ${ notice }
+    </span>
+  </section>
+
+  <div class="signatures">
+    <span class="signature">
+      ${ report.workorder.client.get_description() }
+    </span>
+  </div>
+</div>

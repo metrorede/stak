@@ -1,0 +1,44 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="guide" style="task 2column"
+      id="app-till">
+
+  <title>Aplicativo Caixa</title>
+  <info>
+    <desc>
+      <link xref="till" />,
+      <link xref="sale" />,
+      <link xref="client" />,
+      <link xref="payment-method" />...
+    </desc>
+
+    <link type="guide" xref="index" />
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+  </info>
+
+  <p>
+    Este <link xref="overview#app">aplicativo</link> está diretamente voltado
+    para a área de controle de
+    <link xref="sale">vendas</link>, sendo responsável pelo gerenciamento de
+    cada <link xref="till">caixa</link> da empresa e realizando operações
+    comuns a ele como <link xref="till-add-money">suprimentos</link> 
+    <link xref="till-remove-money">sangrias</link>.
+  </p>
+  <p>
+    Todas as vendas realizadas no <link xref="app-pos" /> podem ser verificadas
+    aqui, assim como <link xref="sale-quote">Cotações de venda</link> devem ser
+    confirmadas aqui.
+  </p>
+  <p>
+    Este aplicativo também possui uma grande integração com o
+    <link xref="plugin-ecf">plugin ECF</link>, como a adição de um novo
+    menu chamado <gui>ECF</gui> e todas as ações de <link xref="till">caixa</link>
+    dependendo do estado da impressora fiscal instalada no computador. Mais
+    informações podem ser encontradas na sessão do plugin em si.
+  </p>
+
+  <!--This will automatically list all pages that links to this page-->
+  <links type="topic" style="2column">
+    <title>Sumário</title>
+  </links>
+
+</page>

@@ -1,0 +1,116 @@
+  <section id="client_receipt">
+    <table class="details" id="sale_items">
+      <tbody>
+        <tr>
+          <td>${ _("Client") }:</td>
+          <td>${ report.sale.client.person.name }</td>
+          <td>${ _("Sale #") }:</td>
+          <td>${ str(report.sale.identifier) }</td>
+        </tr>
+        <tr>
+          <td>${ _("Sales Person") }:</td>
+          <td>${ report.sale.salesperson.person.name }</td>
+          <td>${ _("Open Date") }:</td>
+          <td>${ format_date(report.sale.open_date) }</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div id="sale_summary">
+        <table>
+          <thead>
+            <tr>
+              <td>${ _("Item") }</td>
+              <td>${ _("WO") }</td>
+              <td>${ _("Price") }</td>
+              <td>${ _("Total") }</td>
+            </tr>
+          </thead>
+
+          <tbody class="list">
+            <% items_discount = 0 %>
+            % for item in report.workorder_items:
+              <% items_discount += (item.sale_item.base_price - item.sale_item.price) * item.sale_item.quantity %>
+              <tr>
+                <td>${ format_quantity(item.quantity) } x
+                    ${ item.sellable.description }
+                    <% remaining = (item.quantity - item.quantity_decreased) %>
+                    % if remaining > 0:
+                      <span class="small">(${ _("Missing:")}
+                                           ${ format_quantity(remaining)})</span>
+                    % endif
+                </td>
+                % if report.use_wo_description:
+                <td>${ report.get_optical_data(item.order).patient }</td>
+                % else:
+                <td>${ item.order.identifier }</td>
+                % endif
+                <td>${ format_price(item.sale_item.base_price) }</td>
+                <td>${ format_price(item.sale_item.get_total()) }</td>
+              </tr>
+            % endfor
+          </tbody>
+
+          <tbody class="summary">
+            % if items_discount:
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>${ _("Items Discount:") }</td>
+                  <td>${ format_price(items_discount) }</td>
+                </tr>
+            % endif
+            <tr class="bold">
+              <td></td>
+              <td></td>
+              <td>${ _("Total:") }</td>
+              <td>${ format_price(report.sale.get_total_sale_amount()) }</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <div id="estimated_finish" >
+      <table>
+        <thead>
+          <tr>
+            <td>${ _("WO") }</td>
+            <td>${ _("Estimated finish") }</td>
+          </tr>
+        </thead>
+        <tbody class="list">
+        % for workorder in report.workorders:
+          <tr>
+            <td>${ report.get_optical_data(workorder).patient}</td>
+            <td>${ format_date(workorder.estimated_finish) }</td>
+          </tr>
+        % endfor
+        </tbody>
+      </table>
+    </div>
+
+    <div id="sale_payments">
+        <table class="details" id="sale_payments">
+            <thead>
+                <tr>
+                    <td>${ _("Payment") }</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                % for method, value in report.method_summary.items():
+                <tr>
+                    <td>${ method.description }</td>
+                    <td>${ value }</td>
+                </tr>
+                % endfor
+                % if report.remaining_to_pay():
+                  <tr>
+                      <td>${ _("Missing") }</td>
+                      <td>${ report.remaining_to_pay() }</td>
+                  </tr>
+                % endif
+            </tbody>
+        </table>
+    </div>
+  </section>

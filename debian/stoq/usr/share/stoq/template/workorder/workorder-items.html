@@ -1,0 +1,29 @@
+<section class="items">
+  <table>
+    <thead>
+      <tr>
+        <td>${ _("Code") }</td>
+        <td>${ _("Item") }</td>
+        <td>${ _("Quantity") }</td>
+        <td>${ _("Price") }</td>
+        <td>${ _("Total") }</td>
+      </tr>
+    </thead>
+
+    <tbody class="list">
+      % for item in report.workorder.order_items:
+      <tr>
+        <td class="code">${ item.sellable.code }</td>
+        <td>${ item.sellable.get_description() }</td>
+        <td class="qtd">${ format_quantity(item.quantity) }</td>
+        <td class="price">${ format_price(item.price) }</td>
+        <td class="price">${ format_price(item.total) }</td>
+      </tr>
+      % endfor
+      <tr class="summary">
+        <td colspan="4">${ _("Total:") }</td>
+        <td>${ format_price(report.workorder.get_total_amount()) }</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

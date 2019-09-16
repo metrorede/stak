@@ -1,0 +1,64 @@
+<%inherit file="base/base.html" />
+<%namespace file="base/base.html" import="header, setup_margin_labels" />
+
+<%block name="extra_meta">
+  <style>
+    % for i, col in enumerate(report.columns, 1):
+        table td:nth-child(${ str(i) }) {
+                text-align: ${ col.get('align', 'left') };
+        }
+    % endfor
+
+    table .summary td {
+      text-align: right;
+    }
+  </style>
+  ${ setup_margin_labels(report.title) }
+
+</%block>
+
+  ${ header(complete_header, report.title, report.subtitle, report.notes) }
+
+
+<section>
+  <table class="list">
+    <thead>
+      <tr>
+        % for col in report.columns:
+          <td>${ col['title'] }</td>
+        % endfor
+      </tr>
+    </thead>
+
+    <tfoot>
+      <tr>
+        % for c in report.columns:
+          <td></td>
+        % endfor
+      </tr>
+    </tfoot>
+
+    <tbody>
+      % for row in report.get_data():
+      <tr>
+        % for column in row:
+          <td>${ column }</td>
+        % endfor
+      </tr>
+      % endfor
+
+      <% summary = report.get_summary_row() %>
+
+      % if summary:
+      <tr class="summary">
+        <td colspan="${ str(len(report.columns) - len(summary) + 1)  }">
+          ${ summary[0] }</td>
+        % for c in summary[1:]:
+            <td>${ c }</td>
+        % endfor
+      </tr>
+      % endif
+    </tbody>
+  </table>
+</section>
+<%block name="after_table" />

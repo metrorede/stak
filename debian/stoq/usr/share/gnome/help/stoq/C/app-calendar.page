@@ -1,0 +1,122 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="guide" style="task 2column"
+      id="app-calendar">
+
+  <title>Aplicativo Calendário</title>
+  <info>
+    <desc>
+      <link xref="account-payable" />,
+      <link xref="account-receivable" />...
+    </desc>
+
+    <link type="guide" xref="index" />
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+  </info>
+
+  <p>
+    Este aplicativo foi desenvolvido com a finalidade de ajudar na vizualização
+    de datas de vencimento de
+    <link xref="account-payable">contas a pagar</link> e
+    <link xref="account-receivable">contas a receber</link>, recebimento de
+    <link xref="purchase">pedidos de compra</link> e etc.
+  </p>
+  <p>
+    Na tela principal, ao contrário da maioria dos aplicativos que exibem uma
+    <link xref="overview#search">pesquisa</link>, ele mostra um calendário.
+    Nesse calendário, poderemos encontrar itens referentes às datas citadas
+    acima.
+  </p>
+  <p>
+    Cada um desses itens pode ser clicado para verificar mais detalhes.
+  </p>
+
+  <section id="colors">
+    <title>Cores dos eventos</title>
+    <p>
+      Utilizamos cores para a fácil diferenciação de eventos apresentados no
+      calendário. Apresentamos aqui uma lista de seus significados:
+    </p>
+    <table rules="rows cols">
+      <tr>
+        <td>
+          <p>Cor</p>
+        </td>
+        <td>
+          <p>Tipo de evento</p>
+        </td>
+        <td>
+          <p>
+            Descrição do evento
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <media type="image" src="figures/color-729fcf.png">
+            <p>A cor azul</p>
+          </media>
+        </td>
+        <td>
+          <p><link xref="purchase">Pedido de compra</link></p>
+        </td>
+        <td>
+          <p>
+            Um pedido de compra aberta com uma data de recebimento esperada,
+            <em>em negrito se estiver atrasado</em>.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <media type="image" src="figures/color-ef2929.png">
+            <p>A cor vermelho</p>
+          </media>
+        </td>
+        <td>
+          <p><link xref="account-payable">Conta a pagar</link></p>
+        </td>
+        <td>
+          <p>
+            Um pagamento a pagar pendente,
+            <em>em negrito se estiver atrasado</em>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <media type="image" src="figures/color-4e9a06.png">
+            <p>A cor verde</p>
+          </media>
+        </td>
+        <td>
+          <p><link xref="account-receivable">Conta a receber</link></p>
+        </td>
+        <td>
+          <p>
+            Um pagamento a receber pendente,
+            <em>em negrito se estiver atrasado</em>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <media type="image" src="figures/color-fcaf3e.png">
+            <p>A cor laranja</p>
+          </media>
+        </td>
+        <td>
+          <p><link xref="client-call">Chamada de cliente</link></p>
+        </td>
+        <td>
+          <p>Utilizado para mostrar chamas recibidas de um cliente</p>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <!--This will automatically list all pages that links to this page-->
+  <links type="topic" style="2column">
+    <title>Sumário</title>
+  </links>
+
+</page>

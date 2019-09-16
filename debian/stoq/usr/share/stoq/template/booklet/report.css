@@ -1,0 +1,136 @@
+@page {
+    margin: 10mm;
+    width: 210mm;
+    height: 297mm;
+}
+
+body {
+    font-family: "Helvetica", sans-serif;
+    margin: 0mm;
+    padding: 0mm;
+}
+
+.page {
+    page-break-after: always;
+}
+
+.booklet {
+    border-bottom: 0.7mm dotted black;
+    height: 70mm;
+    width: 190mm;
+    margin-top: 2mm;
+    padding-bottom: 2mm;
+}
+
+.booklet:last-child {
+    border-bottom: 0px;
+}
+
+.header {
+    height: 4mm;
+    border-bottom: 1mm solid black;
+    font-weight: bold;
+    padding: 1mm;
+}
+
+.header .cnpj {
+    float: right;
+}
+
+.branch-data {
+    font-weight: bold;
+    width: 100%;
+}
+
+.branch-cnpj {
+    text-align: right;
+}
+
+.receipt {
+    position: relative;
+    width: 30%;
+    float: left;
+    height: 100%;
+}
+
+.bill {
+    position: relative;
+    width: 68%;
+    float: right;
+    height: 100%;
+    border-left: 0.7mm dotted black;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0mm;
+    right: 0mm;
+    left: 0mm;
+    border-bottom: 1mm solid black;
+    margin-bottom: 0.3mm;
+    font-size: 8pt;
+    text-align: right;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0mm;
+}
+
+.contents td {
+    font-size: 10pt;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    padding-left: 1mm;
+    padding-right: 1mm;
+    height: 7mm;
+}
+
+.contents td.instructions {
+    border-bottom: 0px;
+}
+
+.contents td:first-child {
+    border-left: 0px;
+}
+
+.contents span {
+    font-size: 6pt;
+    display: block;
+}
+
+.installment .contents td:last-child {
+    text-align: right;
+    border-left: 1px solid black;
+}
+
+.bill td:last-child span {
+    text-align: left;
+}
+
+.instructions {
+    font-size: 9pt;
+    height: 10mm;
+    border: 0px;
+}
+
+p {
+    margin: 0mm;
+}
+
+td, .instructions {
+    vertical-align: baseline;
+}
+
+.instructions div {
+    height: 35mm;
+    overflow: hidden;
+}
+
+.subtitle {
+    font-weight: bold;
+}
+
+.clearfix {
+    clear: both;
+}

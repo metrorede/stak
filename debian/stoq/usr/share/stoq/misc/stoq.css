@@ -1,0 +1,162 @@
+<%
+
+from gi.repository import Gtk
+
+
+if (3, 16) < (Gtk.MAJOR_VERSION, Gtk.MINOR_VERSION) < (3, 22):
+    row_even = 'row:even'
+    row_odd = 'row:odd'
+else:
+    row_even = 'row:nth-child(even)'
+    row_odd = 'row:nth-child(odd)'
+
+%>
+
+/* Fit a bit more data in all TreeViews */
+GtkTreeView {
+    -GtkTreeView-vertical-separator: 4;
+    -GtkTreeView-horizontal-separator: 4;
+    -GtkTreeView-grid-line-width: 0;
+}
+
+/* Make rules hinting be displayed */
+GtkTreeView ${row_even} {
+    background-color: shade(@theme_base_color, 1.0);
+}
+GtkTreeView ${row_odd} {
+    background-color: shade(@theme_base_color, 0.95);
+}
+GtkTreeView:selected ${row_even} {
+    background-color: @theme_selected_bg_color;
+}
+GtkTreeView:selected ${row_odd} {
+    background-color: @theme_selected_bg_color;
+}
+
+/* Transaction Tabs in the Financial Application should
+ * look greenish, like gnucash */
+FinancialSearchResults GtkTreeView {
+    -GtkTreeView-grid-line-pattern: "\x7f\x01";
+    -GtkTreeView-grid-line-width: 1;
+}
+FinancialSearchResults GtkTreeView ${row_even} {
+    background-color: #f5ffe0;
+}
+FinancialSearchResults GtkTreeView ${row_odd} {
+    background-color: #c2e7c4;
+}
+FinancialSearchResults GtkTreeView:selected ${row_even} {
+    background-color: @theme_selected_bg_color;
+}
+FinancialSearchResults GtkTreeView:selected ${row_odd} {
+    background-color: @theme_selected_bg_color;
+}
+
+/* Notebook buttons should have less padding then a normal button */
+NotebookCloseButton {
+    outline-offset: 0;
+    outline-width: 0;
+    padding: 0;
+}
+
+KanbanView {
+    outline-width: 0;
+}
+
+.transparent {
+    background-color: transparent;
+}
+
+#Shortcut .subtitle,
+#AppEntry .subtitle {
+    font-size: 0.75em;
+    color: mix (@theme_fg_color, @theme_bg_color, 0.25);
+}
+
+#Shortcut.active,
+#AppEntry.active {
+    background: mix(@theme_bg_color, @theme_selected_bg_color, 0.25);
+}
+
+#Shortcut:selected .subtitle,
+#AppEntry:selected .subtitle {
+    color: @theme_color;
+}
+
+label.tour {
+    font-size: 1.2em;
+}
+
+.visualmode {
+    /* This seems to be the way sensntive colors are calculated
+     * in the default theme */
+    color: mix (@theme_fg_color, @theme_bg_color, 0.4);
+}
+
+.no-padding {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.warning_count {
+    padding: 2px 4px;
+    border-radius: 5px;
+    color: @error_fg_color;
+    background: @error_color;
+
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.05;
+  }
+}
+
+.blink {
+    animation: blink 1.5s steps(100, start) infinite;
+}
+
+.h1 {
+    font-size: 1.25em;
+}
+
+.tag {
+    padding: 2px 4px;
+    border-radius: 5px;
+}
+
+#WorkOrderRow {
+    border-radius: 3px;
+}
+
+/*
+ *  Work order status tags
+ */
+
+.tag.opened {
+    color: white;
+    background: #a40000;
+}
+.tag.waiting {
+    color: white;
+    background: #a40000;
+}
+
+.tag.in-progress {
+    color: white;
+    background: #ff8c00;
+}
+
+.tag.finished {
+    color: white;
+    background: #204a87;
+}
+
+.tag.client-informed {
+    color: white;
+    background: #4e9a06;
+}
+/*
+*/

@@ -1,0 +1,149 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic" style="task"
+      id="changelog">
+
+  <title>Novidades da versão</title>
+  <info>
+    <desc>
+      Novidades da versão 3.1
+    </desc>
+
+    <link type="guide" xref="index" group="changelog" />
+    <link type="seealso" xref="about" />
+    <link type="seealso" xref="overview" />
+    <link type="seealso" xref="faq" />
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+  </info>
+
+  <p>
+    Confira as principais novidades introduzidas no último lançamento do
+    <app>Stoq</app>.
+  </p>
+  <note style="tip">
+    <p>
+      Você pode encontrar um histórico de lançamentos antigos em:
+      <link href="http://www.stoq.com.br/historico/">Histórico de Lançamentos</link>
+    </p>
+  </note>
+
+  <section id="last-version">
+    <title>Novidades da versão 3.0</title>
+    <p>
+      Data do lançamento: 2019-02-22
+    </p>
+
+    <section>
+      <title>Principais funcionalidades</title>
+      <list>
+        <item><p>Agora é possível deixar recados para os usuários do sistema: Envie mensagens para
+        usuários, perfis de usuário ou todos os usuários de uma filial. Esse aviso aparecerá na tela
+        inicial do Stoq.</p></item>
+        <item><p>Para usuários que não utilizem ECF, agora é permitido abrir mais de um caixa por
+        dia.</p></item>
+        <item><p>Melhor tratamento de dispositivos externos. Fizemos algumas melhorias que devem
+        aumentar a estabilidade do sistema quando comunicando com disposivos externos.</p></item>
+        <item><p>Utilize o Stoq em terminais de auto-serviço com balanças: Configure o Stoq para
+        adicionar um produto automaticamente ao ler o código de um token de venda.</p></item>
+        <item><p>Permissão para criar pagamentos para outras filiais a partir de qualquer computador
+        (em bases sincronizadas)</p></item>
+        <item><p>Diversas melhorias no processo de contagem de inventário, tentando reduzir o número
+        de erros que podem acontecer, como contar um mesmo produto duas vezes e um aviso quando um
+        produto lido não foi encontrado</p></item>
+        <item><p>Diversas informações novas em alguns relatórios, como número da nota fiscal na
+        lista de contas a pagar</p></item>
+        <item><p>Agora é possível indicar o relacionamento ou parentesco entre duas pessoas
+        cadastradas no sistema</p></item>
+        <item><p>Diversas outras melhorias e correçòes de bugs</p></item>
+      </list>
+    </section>
+
+  </section>
+    <section>
+      <title>Agradecimentos</title>
+      <p>
+        Agradecemos a todos que contribuíram para este lançamento acontecer:
+      </p>
+      <p>
+        Andrew Oliveira, Cainã D'Ajuda, Christian Robottom Reis,
+        Eduardo Tadahiro Nishizuka, Felipe Henrique Bellotti Nehmi,
+        Flavia Fernanda Rocha Moraes, Gabriel Gerga, Lucas Couto, Luis Oishi,
+        Luiz Votto, Nihey Luz Takizawa, Ronaldo Maia e Thiago Bellini.
+      </p>
+
+      <p>
+        Agradecemos também a todos que contribuíram com traduções ao longo do
+        desenvolvimento:
+      </p>
+      <p>
+        <em>Alemão (de)</em>: Maximilian Mühlbauer.
+      </p>
+      <p>
+        <em>Árabe (ar)</em>: Fo2adz, drsaudi e
+        عبدالله شلي (Abdellah Chelli).
+      </p>
+      <p>
+        <em>Espanhol (es)</em>: Adolfo Jayme Barrientos, Costeelation,
+        Eduardo Alberto Calvo, Jose Luis Tirado, Miguel Valdiri Badillo,
+        Sergio Meneses e Willy Aguirre.
+      </p>
+      <p>
+        <em>Finlandês (fi)</em>: Tuomas Lähteenmäki.
+      </p>
+      <p>
+        <em>Francês (fr)</em>: El Achèche ANIS, François Laurent,
+        Pierre Slamich e SarahSlean.
+      </p>
+      <p>
+        <em>Grego (el)</em>: Sergios e tzem.
+      </p>
+      <p>
+        <em>Holândes (hr)</em>: Rachid.
+      </p>
+      <p>
+        <em>Inglês australiano (en_AU)</em>: Rafael Neri.
+      </p>
+      <p>
+        <em>Inglês britânico (en_GB)</em>: Anthony Harrington, Johan Dahlin,
+        Rafael Neri e Vibhav Pant.
+      </p>
+      <p>
+        <em>Inglês canadense (en_CA)</em>: Rafael Neri.
+      </p>
+      <p>
+        <em>Italiano (it)</em>: Fidel Nadera, Guybrush88 e simone.sandri.
+      </p>
+      <p>
+        <em>Japonês (ja)</em>: 9APPAT3CH (かっぱてっく).
+      </p>
+      <p>
+        <em>Língua bósnia (bs)</em>: Ajda Marić e Kenan Dervišević.
+      </p>
+      <p>
+        <em>Língua croáta (hr)</em>: Nenad Čubić.
+      </p>
+      <p>
+        <em>Língua húngara (hu)</em>: osiixy.
+      </p>
+      <p>
+        <em>Polonês (pl)</em>: Łukasz M
+      </p>
+      <p>
+        <em>Português (pt)</em>: Rafael Neri, Ronaldo Maia e Tiago Silva.
+      </p>
+      <p>
+        <em>Português brasileiro (pt_BR)</em>: andrelcmarinho, Bruno Rafael Garcia,
+        Gabriel Gerga, Hriostat, Johan Dahlin, Marciel Leal, millemiglia, Rafael Neri,
+        Ronaldo Maia, Silvio Rangel, Thiago Bellini e ruysabino.
+      </p>
+      <p>
+        <em>Russo (ru)</em>: Stepovanyi Ivan.
+      </p>
+      <p>
+        <em>Sueco (sv)</em>: Johan Dahlin.
+      </p>
+      <p>
+        <em>Turco (tr)</em>: Ebubekir KARUL, Irmak Bıçakçıgil, ahmetturan.
+      </p>
+    </section>
+
+</page>

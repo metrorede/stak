@@ -1,0 +1,107 @@
+<%page args="b" />
+<%!
+  from stoqlib.lib.formatters import get_formatted_price
+
+  f_currency = lambda p: get_formatted_price(p) if p else ''
+  f_date = lambda d: d.strftime('%x')
+%>
+
+<div class="bill">
+
+  <div class="header">
+    ${ b.drawer }
+    <span class="cnpj">${ b.drawer_document }</span>
+  </div>
+
+  <div class="installment">
+    <table class="contents">
+      <tr>
+        <td colspan="4">
+          <span>${ _("Drawee") }</span>
+          ${ b.drawee }
+        </td>
+        <td>
+          <span>${ _("Due date") }</span>
+          ${ f_date(b.due_date) }
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <span>${ _("Drawee's document") }</span>
+          ${ b.drawee_document }
+        </td>
+        <td colspan="2">
+          <span>${ _("Drawee's phone number") }</span>
+          ${ b.drawee_phone_number }
+        </td>
+        <td>
+          <span>${ _("Installment") }</span>
+          ${ b.installment }
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span>${ _("Emission date") }</span>
+          ${ f_date(b.emission_date) }
+        </td>
+        <td>
+          <span>${ _("Sale") } #</span>
+          ${ b.order_identifier }
+        </td>
+        <td>
+          <span>${ _("Payment") } #</span>
+          ${ b.payment_number }
+        </td>
+        <td>
+          <span>${ _("Installments total") }</span>
+          ${ f_currency(b.total_value) }
+        </td>
+        <td>
+          <span>(=) ${ _("Document value") }</span>
+          ${ f_currency(b.value) }
+        </td>
+      </tr>
+      <tr>
+        <td class="instructions" rowspan="5" colspan="4">
+          <div>
+            <span>${ _("Instructions") }</span>
+            <p>
+              % for line in b.instructions:
+                ${ line }<br />
+              % endfor
+            </p>
+            <span>${ _("Demonstrative") }</span>
+            <p>
+              % for line in b.demonstrative:
+                ${ line }<br />
+              % endfor
+            </p>
+          </div>
+        </td>
+        <td>
+          <span>(+) ${ _("Penalty") }</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span>(+) ${ _("Interest") }</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span>(-) ${ _("Discount") }</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span>(=) ${ _("Total value") }</span>
+          ${ f_currency(b.value) }
+        </td>
+      </tr>
+    </table>
+  </div> <!-- end div.installment -->
+
+  <div class="footer">
+  </div> <!-- end div.footer -->
+
+</div> <!-- end div.bill -->

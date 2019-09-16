@@ -1,0 +1,54 @@
+.page {
+    font-size: 8pt;
+}
+
+
+#sale_summary .summary td:nth-child(2),
+#sale_summary .summary td:nth-child(3),
+#sale_summary .list td:nth-child(2),
+#sale_summary .list td:nth-child(3) {
+    text-align: right;
+}
+
+hr {
+    border-top: 1px dashed black;
+}
+
+.workorder_details {
+    clear: both;
+    page-break-inside: avoid;
+    position: relative;
+}
+
+.optical_details {
+    display: inline-block;
+    width: 59%;
+    border-right: 0.25cm solid white;
+    box-sizing: border-box;
+}
+
+.optical_prescription {
+    display: inline-block;
+    width: 40%;
+}
+
+#sale_summary {
+    display: inline-block;
+    width: 100%;
+}
+
+#sale_payments {
+    display: inline-block;
+    width: 29%;
+    box-sizing: border-box;
+    border-left: 0.5cm solid white;
+    position:relative;
+    left: 10%;
+}
+
+#estimated_finish {
+    display: inline-block;
+    width: 49%;
+    box-sizing: border-box;
+    border-left: 0.5cm solid white;
+}

@@ -1,0 +1,352 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic" style="task"
+      id="overview">
+
+  <title>Visão geral</title>
+  <info>
+    <desc>
+      Visão geral do Stoq.
+    </desc>
+
+    <link type="guide" xref="index" group="overview" />
+    <link type="seealso" xref="about" />
+    <link type="seealso" xref="faq" />
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+  </info>
+
+  <!--This will automatically list all sections bellow-->
+  <links type="section">
+    <title>Sumário</title>
+  </links>
+
+  <section id="launcher">
+    <title>Lançador de aplicativos</title>
+    <p>
+      Ao abrir o Stoq e realizar o <link xref="user-login">login</link> com o
+      dado usuário, você será apresentado ao lançador de aplicativos:
+      <link xref="#app">aplicativos</link>.
+    </p>
+    <figure>
+      <title>Lançador de aplicativos</title>
+      <desc>
+        O lançador de aplicativos do Stoq, contendo todos os seus aplicativos.
+      </desc>
+      <media type="image" src="figures/stoq_launcher.png" />
+    </figure>
+    <p>
+      Nesta tela podemos iniciar os aplicativos do Stoq com um duplo clique nos
+      ícones ou até mesmo navegando com as setas direcionais do teclado e
+      apertando <key>Enter</key>.
+    </p>
+    <p>
+      Ao lançar um aplicativo, podemos retornar ao lançador através do menu
+      <guiseq><gui>Arquivo</gui><gui>Fechar</gui></guiseq> ou simplesmente
+      pressionar <keyseq><key>Ctrl</key><key>W</key></keyseq>.
+    </p>
+    <note>
+      <p>
+        Para manter a compatibilidade com versões anteriores do Stoq, também é
+        possível trocar de aplicativo utilizando a tecla <key>F5</key>.
+      </p>
+    </note>
+  </section>
+
+  <section id="app">
+    <title>Aplicativos</title>
+    <p>
+      Os aplicativos são a base do funcionamento do Stoq. Eles são lançados
+      através do <link xref="#launcher" /> e podem rodar conjuntamente
+      se lançados em janelas diferentes (através do menu
+      <guiseq><gui>Arquivo</gui><gui>Novo</gui><gui>Janela</gui></guiseq>).
+    </p>
+    <p>
+      Para simplificar a da vida dos usuários e administradores de empresas, o
+      Stoq faz uma separação de funcionalidades de um sistema de gestão
+      comercial/industrial em diversos aplicativos. Você pode saber mais sobre
+      cada um na <link xref="index">página inicial</link> do manual.
+    </p>
+    <note style="important">
+      <p>
+        Cada <link xref="user">usuário no sistema</link> deverá estar vinculado
+        a um <link xref="user-profile">perfil de usuário</link>, o qual
+        restringirá a sua permissão de utilização de aplicativos.
+      </p>
+    </note>
+    <section id="toolbar">
+      <title>Barra de ferramentas</title>
+      <p>
+        Em todos os aplicativos, com exceção do <link xref="app-pos"/> por
+        questões de usabilidade, exibiremos uma barra de ferramentas para
+        facilitar o uso do Stoq.
+      </p>
+      <media type="image" src="figures/stoq_toolbar.png" />
+      <p>
+        Este é um exemplo da barra de ferramentas do <link xref="app-sales" />.
+      </p>
+      <p>
+        O botão <gui>Novo</gui> provê uma facilidade para a criação de
+        registros referentes ào aplicativo em questão, como a
+        <link xref="product-new">criação de um produto</link> no
+        <link xref="app-purchase" /> e etc. Esses mesmos itens normalmente são
+        providos também em <guiseq><gui>Arquivo</gui><gui>Novo</gui></guiseq>.
+      </p>
+      <p>
+        O botão <gui>Buscar</gui> provê uma facilidade para a pesquisa de
+        registros referentes ào aplicativo em questão, como a
+        <link xref="product-search">pesquisa por um produto</link> no
+        <link xref="app-purchase" /> e etc. Esses mesmos itens são providos, em
+        maior quantidade inclusive, no menu <gui>Pesquisar</gui>.
+      </p>
+      <p>
+        O botão <gui>Imprimir</gui> (representado pelo ícone de uma impressora
+        na figura acima), pode representar alguma atividade específica em algum
+        aplicativo, mas no geral, em aplicativos que tenham uma
+        <link xref="#search">pesquisa</link> ele irá imprimir um
+        <link xref="#report">relatório</link> da lista de resultados, baseado
+        nos <link xref="#search-filter">filtros</link> e a visibilidade das
+        <link xref="#search-column">colunas</link>.
+      </p>
+    </section>
+    <section id="results">
+      <title>Resultados</title>
+      <p>
+        Na maioria dos aplicativos teremos uma lista de resultados. Esta lista
+        nada mais é que uma <link xref="#search">pesquisa</link> e se
+        comporta como tal!
+      </p>
+      <p>
+        Um ponto interessante a notar são as ações que podemos realizar nesses
+        registros. Pegando como exemplo o <link xref="app-receivable" />: Ao
+        selecionarmos um registro (nesse caso, ele representa um pagamento),
+        poderemos acessar as suas ações através do menu <gui>Pagamento</gui>
+        (no caso de outros aplicativos, o nome do menu seria diferente, como
+        <gui>Pedido</gui> para o <link xref="app-purchase" />). Algumas das
+        ações mais frequentes são providas no final da
+        <link xref="#toolbar">barra de ferramentas</link> para
+        facilidade.
+      </p>
+      <p>
+        Para uma maior facilidade ainda, podemos acessar as mesmas opções
+        dando um clique com o botão direito do mouse no registro:
+      </p>
+      <media type="image" src="figures/stoq_results_popup.png" />
+      <p>
+        Um popup abrirá e será possível realizar ações diretamente por alí.
+        Esta popup é um exemplo de um registro do <link xref="app-receivable" />.
+      </p>
+    </section>
+  </section>
+
+  <section id="search">
+    <title>Pesquisas</title>
+    <p>
+      No Stoq, utilizamos dialogos de pesquisa muito parecidos para localizar
+      registros. Como exemplo, localizamos vendas na tela principal do
+      <link xref="app-sales" /> e produtos no menu
+      <guiseq><gui>Pesquisar</gui><gui>Produtos</gui></guiseq> do
+      <link xref="app-purchase" />. Realizamos a pesquisa digitando algum
+      padrão que queremos encontrar (como parte do nome de um produto, parte de
+      seu código de barras, etc) e apertamos <key>Enter</key> ou clicamos no
+      botão <gui>Localizar</gui> ao lado.
+    </p>
+    <media type="image" src="figures/stoq_search_search.png" />
+    <note style="important">
+      <p>
+        Em algumas pesquisas, mais notavelmente nos aplicativos, o botão
+        localizar pode estar escondido. Nessas pesquisas, a atualização da
+        mesma é feita automaticamente, porém, você ainda pode utilizar a tecla
+        <key>Enter</key> na caixa de pesquisa para forçar uma atualização.
+      </p>
+    </note>
+    <p>
+      Na maioria de nossas das pesquisas, encontraremos em baixo da lista de
+      resultados dois botões, <gui>Novo</gui> e <gui>Editar</gui>.
+    </p>
+    <media type="image" src="figures/stoq_search_new_edit.png" />
+    <p>
+      O botão <gui>Novo</gui> irá abrir um
+      <link xref="#editor">editor</link> para a criação de um novo
+      registro, do mesmo tipo da pesquisa (na pesquisa de produtos, ele criará
+      um novo produto). Ao selecionarmos um registro na lista, o botão
+      <gui>Editar</gui> será habilitado e poderá ser clicado. Isso abrirá um
+      <link xref="#editor">editor</link> para a edição do registro em questão.
+    </p>
+    <section id="search-filter">
+      <title>Filtros</title>
+      <p>
+        Nos dialogos de pesquisa, podemos clicar no ícone da caixa de pesquisa
+        para criar filtros adicionais:
+      </p>
+      <media type="image" src="figures/stoq_search_filter.png" />
+      <p>
+        Este é um exemplo do <link xref="app-receivable" />.
+      </p>
+      <p>
+        Cada um dos itens existentes nessa pop-up representa uma
+        <link xref="#search-column">coluna</link> da pesquisa, mesmo que
+        oculta. Ao selecionar um desses itens, será possível refinar a pesquisa
+        através deste atributo. ex: Ao selecionar <gui>Data do pagamento</gui>,
+        será possível filtrar os pagamentos para exibir apenas os que foram
+        pagos no dia de ontem, no mês passado, ou mesmo entre 2 datas.
+      </p>
+      <p>
+        Você é livre para adicionar quantos filtros forem necessários. Isso
+        inclusive é extremamente útil para gerar
+        <link xref="#report">relatórios</link> customizados.
+      </p>
+    </section>
+    <section id="search-column">
+      <title>Colunas</title>
+      <p>
+        Nas pesquisas, exibiremos os registros em uma formato de tabela. Cada
+        coluna pode ser clicada para que a ordenação dos dados seja feita a
+        partir dela.
+      </p>
+      <p>
+        Podemos também dar um clique direito na região das colunas:
+      </p>
+      <media type="image" src="figures/stoq_search_column_visibility.png" />
+      <p>
+        Um menu será aberto onde poderemos escolher a visibilidade das colunas,
+        inclusive de várias que estavam escondidas por padrão.
+      </p>
+      <note style="important">
+        <p>
+          O Stoq respeita as opções de visualização de colunas do usuário, isto
+          é, em todas as pesquisas, ele salva o tamanho das colunas, a
+          ordenação e até mesmo a visibilidade das mesmas e restaura essas
+          opções na próxima vez que a pesquisa for rodada. Essa funcionalidade
+          é realizada a nível de usuário e computador, ou seja, as alterações
+          nas colunas de um usuário X em um computador Y apenas surtirão efeito
+          para esse mesmo usuário utilizando o mesmo computador. O usuário Z
+          não irá ter suas colunas alteradas nesse computador Y, assim como
+          esse usuário X não terá as suas colunas alteradas no computador W.
+        </p>
+      </note>
+    </section>
+  </section>
+
+  <section id="editor">
+    <title>Editores</title>
+    <p>
+      No Stoq, ao criarmos/editarmos produtos, serviços, pessoas, etc,
+      utilizamos um dialogo com botões <gui>Cancelar</gui> e <gui>Ok</gui> que
+      chamamos de Editor.
+    </p>
+    <p>
+      Na maioria dos casos, o mesmo editor é utilizado para criação e edição do
+      registro em questão. O botão <gui>Ok</gui> confirma a ação enquanto o
+      botão <gui>Cancelar</gui> anula, revertendo qualquer alteração realizada
+      no registro, ou cancelando a criação do mesmo.
+    </p>
+    <section id="required-fields">
+      <title>Campos obrigatórios</title>
+      <p>
+        Em todos os editores, possuiremos campos obrigatórios, indicados por um
+        lápis (pode variar de acordo com o tema do sistema) no canto direito do
+        mesmo.
+      </p>
+      <media type="image" src="figures/stoq_required_field.png" />
+      <p>
+        Ao criar um produto por exemplo, é obrigatório que o mesmo possua uma
+        descrição (nome do produto), um preço de venda e um código único. É
+        altamente recomendado que o resto dos campos sejam preenchidos, pois
+        somente assim conseguiremos uma utilização 100% de tudo o que o Stoq
+        oferece. Porém, o preenchimento correto dos campos obrigatórios é o
+        suficiente para a funcionalidade básica.
+      </p>
+      <p>
+        O Stoq não permitirá a confirmação do editor enquanto houverem campos
+        obrigatórios não preenchidos. Preencha todos antes de apertar em
+        <gui>Ok</gui>.
+      </p>
+    </section>
+    <section id="validation">
+      <title>Validação de campos</title>
+      <p>
+        Para garantir a corretude dos dados e garantir que o Stoq não vá
+        apresentar erros estranhos, realizamos várias validações de campos em
+        diversos editores. Indicamos um campo não válido tornando ele vermelho
+        e mostrando um ícone de erro ao lado.
+      </p>
+      <media type="image" src="figures/stoq_validation_before.png" />
+      <p>
+        Para saber mais sobre o erro, apontamos o mouse para o ícone de erro.
+        Uma mensagem aparecerá, dando mais informações sobre o problema,
+        ajudando então na correção do mesmo.
+      </p>
+      <media type="image" src="figures/stoq_validation_after.png" />
+      <p>
+        O Stoq não permitirá a confirmação do editor enquanto houverem campos
+        com problemas de validação. O botão <gui>Ok</gui> somente será
+        habilitado após a correção de todos os erros.
+      </p>
+    </section>
+  </section>
+
+  <section id="wizard">
+    <title>Assistentes</title>
+    <p>
+      No Stoq, utilizamos assistentes para ajudar na realização de uma tarefa
+      específica que necessita vários passos.
+    </p>
+    <p>
+      Cada um desses passos é tratado pelo Stoq como um
+      <link xref="#editor">editor</link>, e as mesmas regras se
+      aplicam à eles como a existência de
+      <link xref="#required">campos obrigatórios</link>,
+      <link xref="#validation">erros de validação</link>, etc. A
+      diferença está no set de botões encontrados na parte inferior da janela:
+    </p>
+    <media type="image" src="figures/stoq_wizard_buttons.png" />
+    <p>
+      Aqui você poderá <gui>Cancelar</gui> o processo inteiro,
+      <gui>Avançar</gui> ao próximo passo e até mesmo <gui>Voltar</gui> ao
+      passo anterior. No último passo, o botão <gui>Avançar</gui> será
+      substituído pelo botão <gui>Terminar</gui>, cujo qual finalizará o
+      processo com êxito!
+    </p>
+  </section>
+
+  <section id="report">
+    <title>Relatórios</title>
+    <p>
+      No Stoq tentamos facilitar ao máximo a impressão de relatórios. Na maioria
+      das nossas <link xref="#search">pesquisas</link> podemos imprimir um
+      relatório dos resultados:
+    </p>
+    <media type="image" src="figures/stoq_report.png" />
+    <p>
+      Os dados que aparecerão no relatório podem ser controlados através da
+      pesquisa em sí. e.g. Se escondermos a
+      <link xref="#search-column">coluna</link> de <gui>Fornecedor</gui>, ao
+      imprimir o relatório, a mesma não seria mostrada. O mesmo acontece com os
+      resultados, que podem ser controlados com
+      <link xref="#search-filter">filtros</link>.
+    </p>
+    <p>
+      Os dados do cabeçalho são preenchidos automaticamente de acordo com as
+      informações da <link xref="branch">filiail</link>.
+    </p>
+    <p>
+      Isso é uma facilidade muito grande para criarmos relatórios customizados.
+      ex: Queremos um relatório de todas as vendas realizadas no mês de janeiro
+      de 2012, pelo vendedor Claudio. Abrimos o <link xref="app-sales" /> e
+      adicionamos <link xref="#search-filter">filtros</link> para restringir as
+      vendas mostradas para exibir apenas as realizadas em 01/2012 pelo
+      vendedor Otávio. Mandamos então imprimir o relatório, que listará
+      exatamente o que estamos vendo na lista de resultados.
+    </p>
+    <note style="important">
+      <p>
+        Apesar da facilidade em imprimir relatórios, pense em sua
+        responsabilidade social quanto à utilização de papel. Os dados não irão
+        sumir do Stoq do dia para a noite..Imprima apenas se for totalmente
+        necessário! Lembre-se também que as vezes é mais fácil utilizar a opção
+        de impressão em PDF (oferecida pelo sistema operacional) onde o mesmo
+        pode ser anexado e enviado através de um email.
+      </p>
+    </note>
+  </section>
+
+</page>

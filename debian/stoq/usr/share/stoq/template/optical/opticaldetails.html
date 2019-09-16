@@ -1,0 +1,90 @@
+<%page args="workorder, optical_data" />
+
+    <table class="details">
+      <tbody>
+        % if report.sale:
+          <tr>
+            <td>${ _("Sales Person") }:</td>
+            <td colspan="3">${ report.sale.salesperson.person.name }</td>
+          </tr>
+        % else:
+          <tr>
+          <td>${ _("Responsible") }:</td>
+          % if workorder.quote_responsible:
+            <td colspan="3">${ workorder.quote_responsible.get_description() }</td>
+          % else:
+            <td colspan="3"></td>
+          % endif
+          </tr>
+        % endif
+
+        <tr>
+          <td>${ _("Client") }:</td>
+          <td colspan="3"> ${ workorder.client.person.name }
+            <br/> ${ _("Address") }:
+            ${ workorder.client.person.get_address_string() }
+            % if workorder.client.person.phone_number:
+              <br/> ${ _("Phone") }:
+              ${ workorder.client.person.get_formatted_phone_number() }
+            % endif
+            % if workorder.client.person.mobile_number:
+              <br/> ${ _("Mobile") }:
+              ${ workorder.client.person.get_formatted_mobile_number() }
+            % endif
+          </td>
+        </tr>
+
+        % if optical_data.medic:
+            <tr>
+              <td>${ _("Medic") }:</td>
+              <td colspan="3">${ optical_data.medic.person.name }
+               (${ optical_data.medic.crm_number })</td>
+            </tr>
+        % endif
+
+      </tbody>
+    </table>
+
+    % if not report.sale:
+      <p>
+        % if workorder.sellable:
+        ${ workorder.sellable.description }<br />
+        % endif
+        ${ workorder.description }
+      </p>
+    % else:
+      <table>
+        <thead>
+          <tr>
+            <td>${ _("Code") }</td>
+            <td>${ _("Item") }</td>
+            <td>${ _("Qty") }</td>
+          </tr>
+        </thead>
+
+        <tbody class="list">
+          % for item in workorder.get_items():
+          <tr>
+            <td>${ item.sellable.code }</td>
+            <td>${ item.sellable.get_description() }</td>
+            <td>${ format_quantity(item.sale_item.quantity) }</td>
+          </tr>
+          % endfor
+        </tbody>
+      </table>
+    % endif
+
+    % if workorder.defect_reported:
+      <p>
+        <b>${ _("Observations") }:</b><br/>
+         % for line in workorder.defect_reported.split("\n"):
+           ${ line | h }<br />
+         % endfor
+      </p>
+    % endif
+    <!--If there is a sale, realocate the opticaldetails a little bit to create
+     some blank space under it-->
+    % if report.sale:
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    % endif

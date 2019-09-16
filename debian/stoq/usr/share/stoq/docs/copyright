@@ -1,0 +1,154 @@
+Stoq
+====
+
+Copyright (C) 2005-2014 Async Open Source
+
+Stoq is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+More details in COPYING
+
+Copyright (C) 2005-2014 Async Open Source
+
+Stoqlib is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+More details in COPYING.stoqlib
+
+External dependencies:
+
+* Python <http://docs.python.org/2/license.html>
+  License: PSFL
+* GTK+ <http://www.gtk.org/>
+  License: LGPLv2.1+
+* PyGTK <http://www.pygtk.org/>
+  License: LGPLv2.1+
+* Zope.interface <http://pypi.python.org/pypi/zope.interface/>
+  License: ZPLv2.1
+* PIL <http://www.pythonware.com/products/pil/>
+  License: BSD
+* Reportlab <http://www.reportlab.com/software/opensource/rl-toolkit/>
+  License: LGPLv2+, MPL
+* Mako <http://www.makotemplates.org/>
+  License: MIT
+* python-dateutil <http://labix.org/python-dateutil>
+  License: PSFL
+* iso-codes <http://pkg-isocodes.alioth.debian.org/>
+  License: LGPLv2.1+
+* psycopg2 <http://www.initd.org/psycopg/>
+  License: BSD
+* postgresql-client <http:/www.postgresql.org/>
+  License: BSD
+* WebKitGtk <http:/www.webkitgtk.org/>
+  License: LGPLv2.1+
+* PyWebKitGtk <http://code.google.com/p/pywebkitgtk/>
+  License: LGPLv2.1+
+* python-xlwt <https://secure.simplistix.co.uk/svn/xlwt/trunk>
+  License: BSD
+* gudev <https://github.com/nzjrs/python-gudev>
+  License: LGPLv3+
+* python-poppler <https://launchpad.net/poppler-python>
+  License: GPLv2+
+* aptdaemon <https://launchpad.net/aptdaemon>
+  License: GPLv2+
+* python-weasyprint <http://weasyprint.org/>
+  License: BSD
+* vte
+  License: LGPLv2.1+
+* librsvg2 <https://live.gnome.org/LibRsvg>
+  License: LGPLv2.1+
+* antlr <http://www.antlr.org/wiki/display/ANTLR3/Python+runtime>
+  License: Public Domain
+* tinycss <http://packages.python.org/tinycss/>
+  License: BSD
+* lxml <http://www.lxml.de/>
+  License: BSD
+* cssselect <http://www.lxml.de/cssselect/>
+  License: BSD
+* cairosvg <http://www.cairosvg.org/>
+  License: LGPLv3+
+* Storm <http://storm.canonical.com>
+  License: LGPLv2.1+
+* PyInotify <https://github.com/seb-m/pyinotify/wiki>
+  License: MIT
+
+Contains code derived from:
+
+* PyBoleto <http://code.google.com/p/pyboleto>
+  License: MIT
+  Files: stoqlib/lib/boleto.py, stoqlib/reporting/boleto.py
+* Latscii decoder/encoder <http://www.python.org>
+  License: PSFL
+  Files: stoqlib/lib/latscii.py
+* prettydate <..>
+  License: WTFL license
+  Files: stoqlib/lib/dateutils.py
+* Storm <http://storm.canonical.com>
+  License: LGPLv2.1+
+  stoqlib/lib/storm.py
+* Cardinals by Raja Sooriamurthi <raja@cs.indiana.edu> from
+  http://mail.python.org/pipermail/python-list/2000-October/643196.html
+  License: Unknown
+  Files: * stoqlib/lib/cardinals_en.py
+* WeakMethod <http://code.activestate.com/recipes/81253-weakmethod/>
+  Licence: PSF
+  Files: stoqlib/lib/event.py
+* fullcalendar: <http://arshaw.com/fullcalendar>
+  Licence MIT/GPLv2+
+  Files: data/html/js/fullcalendar*, data/html/css/fullcalendar*
+* qTip: <http://craigsworks.com/projects/qtip2/>
+  License: MIT/GPLv2+
+  Files: data/html/js/jquery.qtip*, data/html/css/jquery.qtip*
+* jqplot: <http://www.jqplot.com/>
+  License: MIT/GPLv2
+  Files: data/html/js/jqplot*
+* PythonDecoratorLibrary: <http://wiki.python.org/moin/PythonDecoratorLibrary#Cached_Properties>
+  License: MIT
+  Files stoqlib/lib/decorators.py
+* SphinxContrib: <https://bitbucket.org/birkenfeld/sphinx-contrib/>
+  License: MIT
+  Files stoqlib/lib/zopeautointerface.py
+
+Stoq pixmaps
+============
+
+These pixmaps were copied from gnome-icon-theme, licenced under GPL-v2, and
+can be downloaded from <http://download.gnome.org/sources/gnome-icon-theme/>:
+
+* stoq-edit
+* stoq-calc
+* stoq-devices
+* stoq-documents
+* stoq-inventory-app
+* stoq-pos-app
+* stoq-production-app
+* stoq-purchase-app
+* stoq-services
+* stoq-system
+* stoq-taxes
+* stoq-user-profiles
+
+These pixmaps were copied from evolution, licensed under LGPL-v2/v3:
+
+* stoq-calendar-app
+* stoq-calendar-list
+* stoq-calendar-month
+* stoq-calendar-today
+* stoq-calendar-week
+
+These pixmaps were copied from monodevelop, licensed under LGPLv2.1+:
+
+* stoq-feedback
+
+These pixmaps were copied from libpeas, licensed under LGPLv2:
+
+* stoq-plugin
+
+These pixmaps were copied from http://p.yusukekamiyamane.com/, licensed under
+Creative Commons Attribution 3.0:
+
+* stoq-funnel

@@ -1,0 +1,229 @@
+#!/usr/bin/python3
+# -*- Mode: Python; coding: utf-8 -*-
+#
+# Copyright (C) 2005-2011 by Async Open Source
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+import os
+import platform
+import string
+import sys
+
+if hasattr(sys, 'frozen'):
+    # We're using py2exe:
+    # - no need to check python version
+    # - no need to setup python path
+    # - no need to workaround setuptools
+    # By default, when using py2exe, there is only one item in PYTHONPATH, and
+    # thats the library.zip it created. We are also adding some eggs (including
+    # stoq, kiwi and stoqdrivers), so make sure those are also in the path
+    executable = os.path.realpath(os.path.abspath(sys.executable))
+    root = os.path.dirname(executable)
+    for name in os.listdir(root):
+        if not name.endswith(('.egg', 'whl')):
+            continue
+        sys.path.insert(0, os.path.join(root, name))
+
+    # Allow .pyd files to be imported from egg files
+    from zipextimporter import ZipExtensionImporter
+    # zipextimporter.install would do an insert(0, ZipExtensionImporter)
+    # and that would cause it to try to import all eggs and fail
+    sys.path_hooks.append(ZipExtensionImporter)
+    sys.path_importer_cache.clear()
+
+    # Also add it to the OS PATH, so that the libraries are correclty found.
+    os.environ['PATH'] = root + os.pathsep + os.environ['PATH']
+else:
+    # Required version of Python
+    REQUIRED_VERSION = (3, 4)
+
+    # Directory name, defaults to name of binary, it is relative to ..
+    # a, __init__.py and main.py is expected to be found there.
+    DIRNAME = None
+
+    # Application name, defaults to capitalized name of binary
+    APPNAME = None
+
+    # Do not modify code below this point
+    dirname = DIRNAME or os.path.split(sys.argv[0])[1]
+    appname = APPNAME or dirname.capitalize()
+
+    if sys.hexversion < int('%02x%02x0000' % REQUIRED_VERSION, 16):
+        raise SystemExit("ERROR: Python %s or higher is required to run %s, "
+                         "%s found" % ('.'.join(map(str, REQUIRED_VERSION)),
+                                       appname,
+                                       string.split(sys.version)[0]))
+
+    # Disable Ubuntus scrollbar, if it's not set, users can
+    # force it by setting LIBOVERLAY_SCROLLBAR=1
+    import os
+    if os.environ.get('LIBOVERLAY_SCROLLBAR') != '1':
+        os.environ['LIBOVERLAY_SCROLLBAR'] = '0'
+
+    # FIXME: The gail module is misbehaving on xenial and making Stoq
+    # segfault on some ocasions, and since pygtk/gtk2 has been deprecated,
+    # this is not something that is going to be fixed. Disable it for
+    # now but we can reenable it once we migrate our codebase to gtk3
+    if 'gail' in os.environ.get('GTK_MODULES', ''):
+        mods = os.environ['GTK_MODULES'].split(':')
+        os.environ['GTK_MODULES'] = ':'.join(
+            m for m in mods if m not in ['gail', 'atk-bridge'])
+
+    # Disable global menu for stoq, since it breakes the order and removal of
+    # our dinamic menus
+    os.environ['UBUNTU_MENUPROXY'] = '0'
+    os.environ['GTK_THEME'] = 'Adwaita:light'
+
+
+# We only support portuguese locale on Windows for now
+if platform.system() == 'Windows':
+    import errno
+    import locale
+    import os
+    from ctypes import cdll
+
+    def putenv(key, value):
+        os.environ[key] = value
+        cdll.msvcrt._putenv('%s=%s' % (key, value, ))
+
+    locale.setlocale(locale.LC_ALL, '')
+    putenv('LANGUAGE', 'pt_BR')
+
+    stoq_dir = os.path.join(os.environ['ALLUSERSPROFILE'], 'stoq')
+    os.environ['PGPASSFILE'] = os.path.join(stoq_dir, 'pgpass.conf')
+    logdir = os.path.join(stoq_dir, 'logs')
+    if not os.path.exists(logdir):
+        os.makedirs(logdir)
+
+    # http://www.py2exe.org/index.cgi/StderrLog
+    if 'stoq-cmd' not in sys.argv[0] and 'WINEPREFIX' not in os.environ:
+        for name in ['stdout', 'stderr']:
+            filename = os.path.join(logdir, name + ".log")
+            try:
+                fp = open(filename, "w")
+            except IOError as e:
+                if e.errno != errno.EACCES:
+                    raise
+                fp = open(os.devnull, "w")
+            setattr(sys, name, fp)
+
+
+def setup_stoq_eggs():
+    # Check if there are eggs on the stoq database (without using stoq at all).
+    # this will allow us to insert an egg in the database and all clients will
+    # use that egg instead of the installed stoq.
+    from configparser import SafeConfigParser
+    import psycopg2
+    import tempfile
+
+    if platform.system() == 'Windows':
+        config_path = os.path.join(os.environ['ALLUSERSPROFILE'], 'stoq', 'stoq.conf')
+    else:
+        config_path = os.path.expanduser('~/.stoq/stoq.conf')
+    if not os.path.exists(config_path):
+        return
+
+    config = SafeConfigParser()
+    config.read(config_path)
+
+    dsn = "dbname={dbname} user={dbusername} port={port}".format(
+        dbname=config.get('Database', 'dbname'),
+        dbusername=config.get('Database', 'dbusername'),
+        port=config.get('Database', 'port'),
+    )
+    if config.get('Database', 'address'):
+        dsn = dsn + ' host={address}'.format(address=config.get('Database',
+                                                                'address'))
+    conn = psycopg2.connect(dsn)
+    cursor = conn.cursor()
+    cursor.execute('SELECT plugin_name, egg_content FROM plugin_egg')
+    for (name, data) in cursor.fetchall():
+        tmp = tempfile.NamedTemporaryFile(prefix=name, suffix='.egg', delete=False)
+        tmp.write(data)
+        sys.path.insert(0, tmp.name)
+
+try:
+    setup_stoq_eggs()
+except Exception as e:
+    print('Cant load eggs from database', str(e))
+
+
+# This should be changed when building stoq.exe
+trial = False
+if trial:
+    from stoqlib.gui.base import dialogs
+
+    # Quick hack to disable shortcuts. Note that that the shortcut action is
+    # still executed, but if that shortcuts runs a dialog (as most does), the
+    # dialog will not be displayed
+    def _mock_run_dialog(*args, **kwargs):
+        for i in list(args) + list(kwargs.values()):
+            if i.__class__.__name__ == 'StoqlibStore':
+                i.retval = False
+        return None
+
+    from gi.repository import Gtk
+    from stoq.gui.shell.shellwindow import ShellWindow
+    from stoqlib.api import api
+    import stoq
+    stoq.trial_mode = True
+
+    _check_demo_mode = ShellWindow._check_demo_mode
+
+    def _link_clicked(button):
+        from stoqlib.gui.utils.openbrowser import open_browser
+        open_browser(button.get_uri())
+        return True
+
+    def _check_trial_mode(self):
+        from stoqlib.lib.translation import stoqlib_gettext as _
+        from stoqlib.domain.system import TransactionEntry
+        from stoqlib.lib.dateutils import localnow
+        _check_demo_mode(self)
+
+        start = self.store.find(TransactionEntry).min(TransactionEntry.te_time)
+        days = 60 - (localnow() - start).days
+        title = _("You are using a trial version of Stoq")
+        desc = (_("There are <b>%s days</b> remaining to try all Stoq features") % days)
+        msg = '<b>%s</b>\n%s' % (api.escape(title), desc)
+
+        trial_button = Gtk.LinkButton('https://www.stoq.com.br/trial_windows', _("Activate"))
+        trial_button.connect('activate-link', _link_clicked)
+        if days > 0:
+            _type = Gtk.MessageType.INFO
+        else:
+            _type = Gtk.MessageType.WARNING
+        infobar = self.add_info_bar(_type, msg, action_widget=trial_button)
+
+        if days <= 0:
+            for child in self.main_vbox.get_children():
+                if child is not infobar:
+                    child.set_sensitive(False)
+            dialogs.run_dialog = _mock_run_dialog
+
+    ShellWindow._check_demo_mode = _check_trial_mode
+
+
+if len(sys.argv) > 1 and sys.argv[1] == 'dbadmin':
+    from stoq.dbadmin import main
+    sys.argv.pop(1)
+else:
+    from stoq.main import main
+
+try:
+    sys.exit(main(sys.argv))
+except KeyboardInterrupt:
+    raise SystemExit

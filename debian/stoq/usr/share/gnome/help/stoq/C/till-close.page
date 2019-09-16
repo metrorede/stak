@@ -1,0 +1,71 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic" style="task"
+      id="till-close">
+
+  <title>Fechando o caixa</title>
+  <info>
+    <desc>
+      Fechando o caixa no Stoq.
+    </desc>
+
+    <link type="guide" xref="till" />
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+  </info>
+
+  <p>
+    Este processo é utilizado para fechar o caixa, isto é, finalizar as
+    operações fiscais do dia.
+  </p>
+  <p>
+    Utilizaremos o <link xref="app-till" /> neste guia, porém, o mesmo pode ser
+    feito no <link xref="app-pos" /> por comodidade.
+  </p>
+  <note style="important">
+    <p>
+      Note que após realizar esta operação, o caixa só poderá
+      <link xref="till-open">ser aberto</link> novamente no dia seguinte.
+      Portanto, tenha certeza de que você realmente deseja fazer isso. Você
+      pode também realizar uma
+      <link xref="till-verify">conferência do caixa</link> para imitar este
+      processo na troca de <link xref="user">usuários</link>.
+    </p>
+  </note>
+
+  <steps>
+    <item>
+      <p>
+        Abra o <link xref="app-till" />.
+      </p>
+    </item>
+    <item>
+      <p>
+        Selecione <guiseq><gui>Arquivo</gui><gui>Fechar caixa</gui></guiseq>.
+      </p>
+    </item>
+    <item>
+      <p>
+        No <link xref="overview#editor">editor</link> que será aberto, você
+        pode indicar um valor que está sendo retirada do caixa. Após isso,
+        clique em <gui>Ok</gui>.
+      </p>
+      <note style="tip">
+        <p>
+          Note que, como o caixa deve refletir a situação da
+          <link xref="plugin-ecf">ECF</link>, todos as
+          <link xref="payment-method">formas de pagamento</link> são discriminadas
+          nessa lista. Isso parece confuso a principio. Uma dica é pensar
+          na forma de <gui>Dinheiro</gui> como sendo o dinheiro em caixa, a
+          a forma <gui>Cheque</gui> sendo os cheques recebidos que estão
+          guardados no caixa, a forma <gui>Cartão</gui> sendo estes os
+          comprovantes de transação e assim por diante.
+        </p>
+      </note>
+    </item>
+    <item>
+      <p>
+        Pronto! O caixa foi fechado com sucesso no Stoq.
+      </p>
+    </item>
+  </steps>
+
+</page>

@@ -1,0 +1,107 @@
+<!-- -*- Mode: XML; coding: utf-8 -*- -->
+<!-- vi:si:et:sw=4:sts=4:ts=4 -->
+<!--
+## Copyright (C) 2011 Async Open Source <http://www.async.com.br>
+## All rights reserved
+##
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 2 of the License, or
+## (at your option) any later version.
+##
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with this program; if not, write to the Free Software
+## Foundation, Inc., or visit: http://www.gnu.org/.
+##
+## Author(s): Stoq Team <stoq-devel@async.com.br>
+##
+-->
+
+<menubar action="menubar">
+  <menu action="FileMenu">
+    <menu action="NewMenu">
+      <placeholder name="NewMenuItemPH">
+        <menuitem action="SaleQuote"/>
+        <menuitem action="WorkOrderQuote"/>
+        <menuitem action="LoanNew"/>
+      </placeholder>
+    </menu>
+    <placeholder name="FileMenuPH">
+      <menuitem action="LoanClose"/>
+    </placeholder>
+  </menu>
+  <menu action="SearchMenu">
+    <placeholder name="SearchMenuPH">
+      <placeholder name="SearchGenericItemsPH">
+        <menuitem action="SearchProduct"/>
+        <menuitem action="SearchService"/>
+        <menuitem action="SearchDelivery"/>
+      </placeholder>
+      <separator/>
+      <placeholder name="SearchClientPH">
+        <menuitem action="SearchClient"/>
+        <menuitem action="SearchClientCalls"/>
+        <menuitem action="SearchCreditCheckHistory"/>
+        <menuitem action="SearchClientsWithSale"/>
+        <menuitem action="SearchClientsWithCredit"/>
+      </placeholder>
+      <separator/>
+      <placeholder name="SearchSalesPH">
+        <menuitem action="SearchSalesByPaymentMethod"/>
+        <menuitem action="ReturnedSaleSearch"/>
+        <menuitem action="SearchCommission"/>
+        <menuitem action="SearchSalesPersonSales"/>
+      </placeholder>
+      <separator/>
+      <placeholder name="SearchSaleItemsPH">
+        <menuitem action="SearchUnconfirmedSaleItems"/>
+        <menuitem action="SearchSoldItemsByBranch"/>
+        <menuitem action="SearchSoldItemsByClient"/>
+      </placeholder>
+      <separator/>
+      <placeholder name="SearchLoansPH">
+        <menuitem action="LoanSearch"/>
+        <menuitem action="LoanSearchItems"/>
+      </placeholder>
+    </placeholder>
+  </menu>
+  <placeholder name="AppMenubarPH">
+    <menu action="SaleMenu">
+      <menuitem action="Details"/>
+      <separator/>
+      <menuitem action="Edit"/>
+      <menuitem action="ChangeClient"/>
+      <menuitem action="ChangeSalesperson"/>
+      <menuitem action="SalesCancel"/>
+      <menuitem action="Return"/>
+      <separator/>
+      <!-- Must update nfe plugin if this changes -->
+      <menuitem action="SalesPrintInvoice"/>
+    </menu>
+  </placeholder>
+</menubar>
+<popup name="SaleSelection">
+  <menuitem action="Details"/>
+  <separator/>
+  <menuitem action="Edit"/>
+  <menuitem action="ChangeClient"/>
+  <menuitem action="ChangeSalesperson"/>
+  <menuitem action="SalesCancel"/>
+  <menuitem action="Return"/>
+  <separator/>
+  <!-- Must update nfe plugin if this changes -->
+  <menuitem action="SalesPrintInvoice"/>
+</popup>
+<toolbar action="toolbar">
+  <placeholder name="AppToolbarPH">
+    <separator/>
+    <toolitem action="Edit"/>
+    <toolitem action="Details"/>
+    <toolitem action="Return"/>
+  </placeholder>
+</toolbar>

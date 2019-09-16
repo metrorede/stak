@@ -1,0 +1,39 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="guide" style="task 2column"
+      id="app-purchase">
+
+  <title>Aplicativo Compras</title>
+  <info>
+    <desc>
+      <link xref="purchase" />,
+      <link xref="product" />,
+      <link xref="service" />,
+      <link xref="transporter" />,
+      <link xref="supplier" />...
+    </desc>
+
+    <link type="guide" xref="index" />
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+  </info>
+
+  <p>
+    Este <link xref="overview#app">aplicativo</link> é responsável pela área de
+    compras da empresa. Todas as
+    <link xref="purchase">compras de produtos</link> destinados a venda são
+    realizadas por este aplicativo e posteriormente, encaminhadas ao
+    <link xref="app-stock" /> para futuro recebimento.
+  </p>
+  <p>
+    Através deste aplicativo, é possível gerenciar
+    <link xref="supplier">fornecedores</link>,
+    <link xref="transporter">transportadoras</link>,
+    <link xref="product">produtos</link> e <link xref="service">serviços</link>,
+    facilitando assim o cotidiano dos administradores da empresa.
+  </p>
+
+  <!--This will automatically list all pages that links to this page-->
+  <links type="topic" style="2column">
+    <title>Sumário</title>
+  </links>
+
+</page>

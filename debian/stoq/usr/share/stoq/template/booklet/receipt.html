@@ -1,0 +1,53 @@
+<%page args="b" />
+<%!
+  from stoqlib.lib.formatters import get_formatted_price
+
+  f_currency = get_formatted_price
+  f_date = lambda d: d.strftime('%x')
+%>
+
+<div class="receipt">
+
+  <div class="header">${ b.drawer }</div>
+
+    <div class="rcpt-contents">
+      <table class="contents">
+        <tr>
+          <td colspan="2">
+            <span>${ _("Drawee") }</span>
+            ${ b.drawee }
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span>${ _("Installment") }</span>
+            ${ b.installment }
+          </td>
+          <td>
+            <span>${ _("Due date") }</span>
+            ${ f_date(b.due_date) }
+          </td>
+        </tr>
+        <tr>
+          <td>
+            % if b.order_identifier == '':
+              <span>${ _("Payment") } #</span>
+              ${ b.payment_number }
+            % else:
+              <span>${ _("Sale") } # / ${ _("Payment") } #</span>
+              ${ b.order_identifier } / ${ b.payment_number }
+            % endif
+          </td>
+          <td>
+            <span>${ _("Value") }</span>
+            ${ f_currency(b.value) }
+          </td>
+        </tr>
+      </table>
+    </div> <!-- end div.rcpt-contents -->
+
+    <div class="footer">
+      <p>${ _("Drawee's Receipt") }</p>
+    </div> <!-- end div.footer -->
+
+</div> <!-- end div.receipt -->

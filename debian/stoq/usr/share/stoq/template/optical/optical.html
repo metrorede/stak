@@ -1,0 +1,54 @@
+<%inherit file="../base/base.html" />
+<%namespace file="../base/base.html" import="header, setup_margin_labels" />
+
+<%block name="title_head">
+  <title>${ title }</title>
+</%block>
+
+<%block name="extra_meta">
+  <link rel="stylesheet" href="optical/optical.css" type="text/css" />
+  ${ setup_margin_labels(title) }
+</%block>
+
+<div class="page">
+
+  ${ header(complete_header, title, None, notes) }
+
+  % if report.sale:
+    <%include file="saledetails.html" />
+    % if report.sale.get_first_sale_comment():
+      <p class="notes">
+        <b>${ _("Notes") }:</b>
+        <span> ${ report.sale.get_first_sale_comment() }</span>
+      </p>
+    % endif
+  % else:
+    <%include file="workorderdetails.html" />
+  % endif
+  <hr />
+
+% for workorder in report.workorders:
+  <%
+    optical_data = report.get_optical_data(workorder)
+  %>
+  <div class="workorder_details">
+      <div class="optical_details">
+        <%include file="opticaldetails.html" args="workorder=workorder, optical_data=optical_data"/>
+      </div>
+      <div class="optical_prescription">
+        <%include file="prescription.html" args="workorder=workorder, optical_data=optical_data"/>
+      </div>
+
+  <section class="signatures">
+    <p>&nbsp;</p> <!-- little trick to make the signatures be in a new page
+                       if there is not enough space -->
+    <div>
+      <span class="signature">
+        <b>${ _("Client signature") }</b>
+      </span>
+    </div>
+  </section>
+  </div>
+  <hr/>
+% endfor
+</div>

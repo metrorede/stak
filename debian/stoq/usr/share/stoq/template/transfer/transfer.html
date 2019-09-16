@@ -1,0 +1,106 @@
+<%inherit file="../base/base.html" />
+
+<%namespace file="../base/base.html" import="header, setup_margin_labels" />
+
+<%block name="title_head">
+  <title>${ title }</title>
+</%block>
+
+<%block name="extra_meta">
+  <link rel="stylesheet" href="transfer/transfer.css" type="text/css" />
+  ${ setup_margin_labels(title) }
+</%block>
+
+<div class="page">
+
+  ${ header(complete_header, title, subtitle, notes) }
+
+  <section>
+    <table class="details">
+      <tbody>
+        <tr>
+          <td>${_("Invoice number")}:</td>
+          <td>${ order.invoice.invoice_number if order.invoice.invoice_number else _("N/A") }</td>
+          <td>${_("Status")}:</td>
+          <td>${ order.status_str}</td>
+        </tr>
+        <tr>
+          <td>${_("Open date")}:</td>
+          <td>${ order.open_date.strftime('%x')}</td>
+          % if is_cancelled:
+            <td>${ _("Cancel date") }:</td>
+            <td>${ order.cancel_date.strftime('%x') }</td>
+          % else:
+            <td>${ _("Receival") }:</td>
+            <td>${ order.receival_date.strftime('%x') if order.receival_date else _("Not received yet") }</td>
+          % endif
+        </tr>
+        <tr>
+          <td>${ _("Source") }:</td>
+          <td>${ order.source_branch.get_description() }</td>
+          <td>${ _("Destination") }:</td>
+          <td>${ order.destination_branch.get_description() }</td>
+        </tr>
+        <tr>
+          <td>${ _("Responsible") }:</td>
+          <td>${ order.source_responsible.person.name }</td>
+          <td>${ _("Responsible") }:</td>
+          % if is_cancelled:
+            <td>${ order.cancel_responsible.person.name }</td>
+          % else:
+            <td>${ order.destination_responsible.person.name if order.destination_responsible else _("N/A") }</td>
+          % endif
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <table>
+      <thead>
+        <tr>
+          <td>#</td>
+          <td>${ _("Description") }</td>
+          <td>${ _("Quantity") }</td>
+        </tr>
+      </thead>
+
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tfoot>
+
+      <tbody class="list">
+        % for item in order.get_items():
+          <tr>
+            <td>${ item.sellable.code }</td>
+            <td>${ item.sellable.get_description() }</td>
+            <td>${ item.quantity }</td>
+          </tr>
+        % endfor
+        <tr class="summary">
+          <td colspan="3">Total: ${ total }</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  % if order.comments:
+    <section>
+      <p>${ _("Comments") }:</p>
+      ${ order.comments }
+    </section>
+  % endif
+
+  <section class="signatures">
+    <p>&nbsp;</p> <!-- little trick to make the signatures be in a new page
+                       if there is not enough space -->
+    <span class="signature">${ order.source_responsible.person.name }</span>
+    % if order.destination_responsible:
+      <span class="signature">${ order.destination_responsible.person.name }</span>
+    % endif
+  </section>
+</div> <!-- end div.page -->

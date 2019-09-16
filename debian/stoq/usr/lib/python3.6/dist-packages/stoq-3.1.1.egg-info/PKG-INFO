@@ -1,0 +1,13 @@
+Metadata-Version: 1.0
+Name: stoq
+Version: 3.1.1
+Summary: A powerful retail system
+Home-page: http://www.stoq.com.br
+Author: Async Open Source
+Author-email: stoq-devel@async.com.br
+License: GNU GPL 2.0 and GNU LGPL 2.1 (see COPYING and COPYING.stoqlib)
+Description: 
+              Stoq is an advanced retails system which has as main goals the
+              usability, good devices support, and useful features for retails.
+              
+Platform: UNKNOWN

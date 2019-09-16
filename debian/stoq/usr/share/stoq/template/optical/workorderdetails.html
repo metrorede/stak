@@ -1,0 +1,54 @@
+<section id="client_receipt">
+  <table class="details" id="sale_items">
+    <tbody>
+      % for workorder in report.workorders:
+        <tr>
+          <td>${ _("Client") }:</td>
+          <td>${ workorder.client.person.name }</td>
+          <td>${ _("Work order") }:</td>
+          <td>${ workorder.identifier }</td>
+        </tr>
+        <tr>
+          <td>${ _("Responsible") }:</td>
+          % if workorder.quote_responsible:
+            <td>${ workorder.quote_responsible.get_description() }</td>
+          % else:
+            <td></td>
+          % endif
+          <td>${ _("Open Date") }:</td>
+          <td>${ format_date(workorder.open_date) }</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>${ _("Estimated finish") }:</td>
+          <td>${ format_date(workorder.estimated_finish) }</td>
+        </tr>
+      % endfor
+      <tr>
+        <td></td>
+      </tr>
+      % if workorder.sellable:
+      <tr>
+        <td>${ _("Equipment") }:</td>
+        <td colspan="3">${ workorder.sellable.description }</td>
+      </tr>
+      % endif
+      <tr>
+        <td>${ _("Description") }:</td>
+        <td colspan="3">${ workorder.description }</td>
+      </tr>
+    </tbody>
+  </table>
+
+  % if workorder.defect_reported:
+  <p>
+    <b>${ _("Defect reported by client:") }</b>
+    <span>
+      % for line in workorder.defect_reported.split("\n"):
+        ${ line | h }<br />
+      % endfor
+    </span>
+  </p>
+  % endif
+</section>

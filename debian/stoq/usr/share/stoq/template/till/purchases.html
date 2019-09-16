@@ -1,0 +1,73 @@
+% if report.purchases:
+<h4>${ _("Purchases") }</h4>
+    <table>
+      <thead>
+        <tr class="align-left">
+          <td>${ _("Code") }</td>
+          <td>${ _("Status") }</td>
+          <td>${ _("Responsible") }</td>
+          <td>${ _("Branch") }</td>
+          <td>${ _("Notes") }</td>
+          <td>${ _("Supplier") }</td>
+          <td>${ _("Purchase") }</td>
+          <td>${ _("Method") }</td>
+          <td>${ _("Details") }</td>
+          <td class="align-right">${ _("Value") }</td>
+        </tr>
+      </tdead>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tfoot>
+      <tbody>
+        % for purchase in report.purchases:
+          <tr class="highlight">
+            <td>${ purchase.identifier }</td>
+            <td>${ purchase.status_str }</td>
+            <td>${ purchase.responsible_name }</td>
+            <td>${ purchase.branch_name }</td>
+            <td>${ purchase.notes }</td>
+            <td>${ purchase.supplier_name }</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td class="align-right">${ format_price(purchase.purchase_total) }</td>
+          </tr>
+
+              % for purchase_payment in report.purchases[purchase]:
+              <tr class="align-left">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>${ purchase_payment.identifier }</td>
+                <td>${ purchase_payment.method.get_description()}</td>
+                <td>
+                  % if purchase_payment.check_data:
+                  <span>
+                    ${ _("Bank:") }  ${ purchase_payment.check_data.bank_account.bank_number or ''} |
+                    ${ _("Agency:") }  ${ purchase_payment.check_data.bank_account.bank_branch or ''} |
+                    ${ _("Acount:") }  ${ purchase_payment.check_data.bank_account.bank_account or ''}
+                  </span>
+                  % endif
+                </td>
+                <td class="align-right">${ format_price(purchase_payment.value) }</td>
+              </tr>
+              % endfor
+        % endfor
+      </tbody>
+    </table>
+% endif
+

@@ -1,0 +1,72 @@
+<%inherit file="../base/base.html" />
+<%namespace file="../base/base.html" import="header, setup_margin_labels" />
+
+<%block name="extra_meta">
+  <link rel="stylesheet" href="base/base.css" type="text/css" />
+  <link rel="stylesheet" href="till/till.css" type="text/css" />
+  ${ setup_margin_labels(title) }
+
+  <style>
+    #items .list td:nth-child(3),
+    #items .list td:nth-child(4),
+    #items .list td:nth-child(5) {
+      text-align: right;
+    }
+  </style>
+
+</%block>
+
+${ header(complete_header, title, report.get_subtitle(), notes) }
+
+
+% if report.has_in_payments():
+<h3>${ _("Input Payments:") }</h3>
+<%include file="sales.html" />
+<%include file="lonely-payments.html" args="payments=report.lonely_in_payments" />
+% endif
+
+% if report.has_out_payments():
+  <h3>${ _("Output Payments:") }</h3>
+  <%include file="purchases.html" />
+  <%include file="lonely-payments.html" args="payments=report.lonely_out_payments" />
+  <%include file="return-sales.html" />
+% endif
+
+% if report.has_till_entries():
+  <h3>${ _("Till Supply/Removal Operations:") }</h3>
+  <%include file="supplies.html" />
+  <%include file="removals.html" />
+% endif
+
+<h3>${ _("Summary:") }</h3>
+<div id="summary">
+  <div>
+  <%include file="summary.html" />
+  </div>
+  <div>
+  <%include file="card-summary.html" />
+  </div>
+</div>
+
+<br/><br/><br/>
+<h3>${ _("Observations:") }</h3>
+% if report.tills:
+  <ul>
+  % for till in report.tills:
+    % if till.observations:
+    <li><b>${ format_date(till.opening_date) }</b> ${ till.observations }</li>
+    % endif
+  % endfor
+  </ul>
+% else:
+<br/><br/><br/><br/><br/><br/><br/>
+% endif
+
+<section class="signatures">
+  <p>&nbsp;</p> <!-- little trick to make the signatures be in a new page
+                     if there is not enough space -->
+  <span class="signature">${ _("Signature") }</span>
+  <span class="signature">${_("Verified by") }</span>
+</section>
+
+</div> <!-- end div.page -->

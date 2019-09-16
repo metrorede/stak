@@ -1,0 +1,214 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic" style="task"
+      id="faq">
+
+  <title>Perguntas frequentes</title>
+  <info>
+    <desc>
+      Perguntas frequentes do Stoq.
+    </desc>
+
+    <link type="guide" xref="index" group="faq" />
+    <link type="seealso" xref="overview" />
+    <link type="seealso" xref="about" />
+    <link type="seealso" xref="installation" />
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+  </info>
+
+  <!--This will automatically list all pages that links to this page-->
+  <links type="section">
+    <title>Sumário</title>
+  </links>
+
+  <section id="nfe-support">
+    <title>O Stoq suporta notas fiscais eletrônicas?</title>
+    <p>Sim. O Stoq tem suporte para NF-e.</p>
+
+    <p>Esse suporte é oferecido em conjunto com o aplicativo disponibilizdo
+    gratúitamente pela Secretaria da Fazenda</p>
+
+    <p>Após habilitar o <link xref="plugin-nfe">plugin nfe</link>,
+    para cada venda que for realizada e que possua um cliente indicado, será
+    exportado um arquivo .txt, que deverá posteriormente ser importado no
+    sistema da sefaz. Todo o processo de assinatura, envio e impressão do
+    danfe serão realizados no sistema da <link
+    href="http://www.nfe.fazenda.gov.br/">sefaz</link>.</p>
+
+    <p>Um ponto importante a observar em relação a NFe, é a questão dos
+    certificados:
+    </p>
+
+    <p>Existem dois tipos de certificados disponívels: A1 e A3. Os
+    certificados A1 são apenas um arquivo, então o seu funcionamento em
+    linux não apresenta problemas.
+    </p>
+
+    <p>Já os certificados A3 são um dispositivo USB (Token USB ou
+    Smartcard), e o seu uso em linux fica dependendo da disponibilidade dos
+    drivers corretos, compatíveis com a versão atual da distribuição linux
+    que esteja usando no momento.
+    </p>
+  </section>
+
+
+  <section id="use-in-pt-br">
+    <title>Instalei o Stoq em inglês, mas gostaria de utilizá-lo em português. Como faço?</title>
+    <p>
+      O Stoq por padrão irá rodar na lingua do sistema do usuário. Isto é, se
+      você estiver utilizando o seu sistema operacional em inglês, o Stoq irá
+      abrir em inglês.
+    </p>
+    <p>
+      Essa opção pode ser fácilmente mudada nas preferências do usuário, no
+      menu <guiseq><gui>Editar</gui><gui>Preferências</gui></guiseq>. Lá você
+      pode escolher rodar o Stoq em Português do Brasil.
+    </p>
+    <p>
+      Caso essa opção deixe o Stoq "meio" traduzido, isto é, com algums partes
+      traduzidas e outras em inglês, significa que você não possui os pacotes
+      de tradução do <link href="http://www.gtk.org">GTK+</link> em
+      Português do Brasil.
+    </p>
+    <p>
+      Se estiver utilizando o Ubuntu, basta apenas instalar o pacote
+      <link href="apt:language-support-pt">language-support-pt</link>. A
+      partir daí as configurações acima devem funcionar corretamente.
+    </p>
+  </section>
+
+  <section id="fiscal-printer">
+    <title>Eu posso utilizar o aplicativo caixa sem possuir uma impressora fiscal?</title>
+    <p>
+      Isso depende. Se você tiver habilitado o
+      <link xref="plugin-ecf">plugin ECF</link> a utilização da impressora
+      fiscal é obrigatória. Caso contrário, não!
+    </p>
+    <p>
+      Verifique se o seu estabelecimento é obrigado a imprimir notas fiscais.
+      Caso seja, a ativação desse plugin é obrigatória pela lei e não opcional!
+    </p>
+  </section>
+
+  <section id="print-bill">
+    <title>O Stoq é capaz de imprimir boletos? Como faço para configurá-los?</title>
+    <p>
+      O Stoq é capaz de imprimir boletos para
+      <link xref="account-receivable">contas a receber</link>.
+    </p>
+    <p>
+      Para informações de como configurá-los, consulte a página do manual sobre
+      <link xref="bill">boletos</link>.
+    </p>
+  </section>
+
+  <section id="more-than-one-app">
+    <title>Como faço para abrir mais de um aplicativo do Stoq ao mesmo tempo?</title>
+    <p>
+      Você pode realizar isso em todos os aplicativos no menu
+      <guiseq><gui>Arquivo</gui><gui>Novo</gui><gui>Janela</gui></guiseq>, ou
+      mesmo na <link xref="overview#toolbar">barra de ferramentas</link>, no
+      menu <guiseq><gui>Novo</gui><gui>Janela</gui></guiseq>.
+    </p>
+    <p>
+      Essa opção irá abrir uma janela nova do Stoq, totalmente independente da
+      outra, te possibilitando possuir mais de 1 aplicativo aberto ao mesmo
+      tempo.
+    </p>
+  </section>
+
+  <section id="change-stock">
+    <title>Como faço para ajustar os valores lançados na opção "estoque inicial"? É possível zerar e cadastrar novamente?</title>
+    <p>
+      O processo de
+      <link xref="stock-register-initial">registro de estoque inicial</link> só
+      pode ser utilizado uma vez para cada produto. Após isso, você pode
+      utilizar <link xref="inventory">inventários</link> para realizar ajustes.
+    </p>
+  </section>
+
+  <section id="backup">
+    <title>Como realizo um backup completo do Stoq?</title>
+    <p>
+      Todas as informações do Stoq são guardadas na base de dados PostgreSQL.
+      Realizando um backup da base é o suficiente para preservar todas essas
+      informações/configurações. Para isso, utilize o comando:
+    </p>
+    <p>
+      <cmd>$ pg_dump -Fc dbname > stoq.dump</cmd>
+    </p>
+    <p>
+      Substitua <code>dbname</code> pelo nome da base de dados utilizada pelo
+      Stoq.
+    </p>
+    <p>
+      Algumas configurações são guardados no diretório <file>~/.stoq</file>,
+      como informações de conexão, algumas configurações específicas de
+      usuários e etc, podendo você também guardá-la.
+    </p>
+  </section>
+
+  <section id="restore-backup">
+    <title>Como restauro um backup do Stoq?</title>
+    <p>
+      Se você realizou o backup utilizando a dica de
+      <link xref="#backup">backup</link> acima, você pode restaurá-lo com:
+    </p>
+    <p>
+      <cmd>$ pg_restore -d dbname stoq.dump</cmd>
+    </p>
+    <note style="important">
+      <p>
+        O comando <code>pg_restore</code> deve ser rodado em uma base
+        vazia recém criada. Caso você pretenda restaurar o backup em cima
+        de uma base já existente, primeiro faça:
+      </p>
+      <p>
+        <cmd>$ dropdb dbname ; createdb dbname</cmd>
+      </p>
+    </note>
+    <p>
+      Substitua <code>dbname</code> pelo nome da base de dados utilizada pelo
+      Stoq.
+    </p>
+  </section>
+
+  <section id="ecf-configuration">
+    <title>Preciso usar uma ECF, como devo configurá-la?</title>
+
+    <p>Antes de utilizar o Stoq com a sua ECF, é preciso certificar-se de
+    que ela está configurada da maneira que o Stoq espera. Para todas as
+    impressoras, o Stoq espera encontrar as seguintes formas de pagamento:</p>
+
+    <list>
+        <item><p>Dinheiro</p></item>
+        <item><p>Cheque</p></item>
+        <item><p>Boleto</p></item>
+        <item><p>Cartao Credito</p></item>
+        <item><p>Cartao Debito</p></item>
+    </list>
+
+    <p>Outras formas de pagamento podem estar cadastradas, mas o Stoq irá
+    detectar os métodos descritos acima automaticamente. Caso não sejam
+    detectados, ainda é possível utilizar, mas será necessária uma
+    configuração manual.</p>
+
+    <p>Para as impressoras do tipo FiscNet (diversas fabricantes, incluindo
+    Elgin, Dataregis e Perto), também pode ser necessário o cadastro de dois
+    documentos não fiscais: 'Sangria' e 'Suprimento'.
+    </p>
+
+  </section>
+
+  <section id="more-help">
+    <title>Minha dúvida não foi sanada. Como consigo mais ajuda?</title>
+    <p>
+      Dê uma olhada na <link xref="overview">visão geral</link> pois esta
+      possui uma gama de informações que podem acabar sanando a sua dúvida.
+    </p>
+    <p>
+      Caso não tenha encontrado nada sobre a sua dúvida você pode tentar
+      <link xref="about#contact-us">entrar em contato conosco</link>.
+    </p>
+  </section>
+
+</page>

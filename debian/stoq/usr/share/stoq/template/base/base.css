@@ -1,0 +1,262 @@
+/* This css file is organized in the following order:
+ *
+ *  1) Common and utility classes
+ *  2) Default formating for html elements
+ *  3) Tables formatting
+ *      3.1) generic lists
+ *      3.2) package rows
+ *      3.3) summary row
+ *      3.4) summary table
+ *      3.5) details table
+ */
+
+
+/*
+ *      1) Common and utility classes
+ *
+ */
+.page {
+    width: 90%;
+    page-break-after: always;
+}
+
+/* Since the span.signatures are floating left, reserve some space in the
+ * signatures section so that they can appear */
+section.signatures {
+    min-height: 2cm;
+}
+
+.signature {
+    float: right;
+    text-align: center;
+    width: 40%;
+    bottom: 0px;
+    border-top: 1px solid black;
+    margin-left: 1cm;
+    margin-bottom:1cm;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.small {
+    font-size: 0.75em;
+}
+
+header .logo {
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: auto 2cm;
+    height: 2cm;
+    width: 5cm;
+    position: absolute;
+    text-align: right;
+    top: 0; right: 0;
+}
+
+header .logo img {
+  max-height:2cm;
+  max-width:5cm;
+}
+
+header #company {
+    float: right;
+    display: none;
+}
+
+header span {
+    display: block;
+}
+
+header #title {
+    float: left;
+}
+
+header h1,
+header h3 {
+    margin: 0;
+}
+
+header p {
+    margin: 0;
+}
+
+header .subtitle {
+    margin: 0;
+    font-weight: bold;
+    color: #333;
+}
+
+header .notes {
+    font-size: 8pt;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5mm;
+}
+
+
+/*
+ *      2) Default formating for html elements
+ *
+ */
+
+@page {
+    margin: 15mm;
+}
+
+body {
+    margin: 0;
+}
+
+/* This is here just to have a nice formating when displaying the html in
+ * the browser
+ */
+@media screen {
+    .page {
+        background-color: white;
+        width: 267mm;
+        height: 100%;
+        padding: 15mm;
+        margin: 0 auto;
+        box-shadow: 5px 5px 5px #888, -5px 5px 5px #888;
+    }
+}
+
+header {
+    min-height: 2.2cm;
+    padding-right: 4cm;
+    position: relative;
+}
+
+section {
+    clear: both;
+}
+
+h3 {
+    margin-bottom: 5mm;
+    font-weight: bold;
+    text-align: left;
+}
+
+/*
+ *      3) Table formating
+ *
+ */
+
+table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+thead {
+    font-weight: bold;
+}
+
+tfoot {
+    font-weight: bold;
+}
+
+thead td {
+    border-bottom: 2px solid black;
+    padding: 1mm;
+    vertical-align: bottom;
+}
+
+tbody td {
+    padding: 1mm;
+    border-left: 1px solid #ddd;
+}
+
+tfoot td {
+    padding: 1mm;
+    border-top: 2px solid black;
+    font-weight: bold;
+}
+
+tbody td:last-child {
+    border-right: 1px solid #ddd;
+}
+
+/*      3.1) Generic lists
+ */
+
+.list tr:nth-child(2n) {
+    background-color: #f1f1f1;
+}
+
+.list td:last-child {
+    text-align: right;
+}
+
+/*      3.2 Package rows
+ *
+ *      This should be used with <tr class="packed"> for items
+ *      which belong to a package.
+ */
+
+tr.packed td {
+    padding-left:10mm;
+    font-size: 68%;
+}
+
+/*      3.3 Summary row
+ *
+ *      This should be used with <tr class="summary"> when there is an extra
+ *      row at the end of the table for some summaries
+ */
+
+tr.summary {
+    text-align: right;
+    font-weight: bold;
+    background-color: white;
+}
+
+tr.summary td {
+    border-top: 2px solid black;
+    border-left: 0;
+}
+
+tr.summary td:last-child {
+    border-right: 0;
+}
+
+/*      3.4) Summary table
+ *
+ *      This should be used with <tbody class="summary">  for when the
+ *      <table> has an extra <tbody> in the end for some long (multi-line)
+ *      summary about the list
+ */
+
+tbody.summary tr:first-child td {
+    border-top: 2px solid black;
+}
+
+tbody.summary tr:last-child td {
+    border-bottom: 0;
+}
+
+tbody.summary td {
+    border-left: 1px solid white;
+}
+
+tbody.summary tr {
+    background-color: white !important;
+}
+
+/*      3.4) Details table
+ *
+ *      Use this class for a table with 2n columns, where even columns have
+ *      a bold text aligned to the right (for a property name) and even
+ *      columns are normal text (for the property value)
+ */
+
+table.details td {
+    border: 0;
+}
+
+table.details td:nth-child(2n+1) {
+    font-weight: bold;
+    text-align: right;
+}
+

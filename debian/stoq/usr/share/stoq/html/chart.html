@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="/static/css/jquery.jqplot.min.css"/>
+  <script type='text/javascript' src='/static/js/jquery.min.js'></script>
+  <script type="text/javascript" src="/static/js/jquery.jqplot.min.js"></script>
+  <script type="text/javascript" src="/static/js/jqplot.barRenderer.min.js"></script>
+  <script type="text/javascript" src="/static/js/jqplot.categoryAxisRenderer.min.js"></script>
+  <script type="text/javascript" src="/static/js/jqplot.pointLabels.min.js"></script>
+</head>
+<body>
+  <div id="description"></div>
+  <div id="chart"></div>
+
+<script type="text/javascript">
+  var options = {
+     seriesDefault: {
+       renderer: $.jqplot.BarRenderer,
+       rendererOptions: {fillToZero: true}
+     },
+     legend: {
+         show: true,
+         placement: "outsideGrid"
+     },
+     axes: {
+         // Use a category axis on the x axis and use our custom ticks.
+         xaxis: {
+             renderer: $.jqplot.CategoryAxisRenderer,
+         },
+         // Pad the y axis just a little so bars can get close to, but
+         // not touch, the grid boundaries.  1.2 is the default padding.
+         yaxis: {
+             pad: 1.05,
+             tickOptions: {formatString: "R$%d"}
+         }
+     }
+  };
+
+  function plot(data, extra) {
+    options.series = extra.series;
+    if (extra.xaxis_ticks) {
+       options.axes.xaxis.ticks = extra.xaxis_ticks;
+    }
+    $("#description").html(extra.description);
+    $.jqplot("chart", data, options);
+  }
+</script>
+
+</body>
+</html>
